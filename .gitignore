@@ -1,5 +1,6 @@
 node_modules/
 dist/
+ui-ux-pro-max-skill/
 __pycache__/
 *.pyc
 .DS_Store
