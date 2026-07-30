@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{{ property_name }} — {{ area }}, {{ city }} | Nestly Africa</title>
+  <meta name="description" content="{{ meta_description }}" />
+  <meta name="keywords" content="BnB {{ area }}, furnished apartment {{ area }} {{ city }}, short stay {{ area }}, airbnb {{ area }} {{ city }}, {{ extra_keywords }}" />
+
+  <meta property="og:title" content="{{ property_name }} — {{ area }} Furnished Rental" />
+  <meta property="og:description" content="{{ meta_description }}" />
+  <meta property="og:image" content="{{ hero_image }}" />
+  <meta property="og:type" content="website" />
+  {% if booking_link %}
+  <meta property="og:url" content="{{ booking_link }}" />
+  {% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&family=Playfair+Display+SC:wght@400;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "{{ property_name }}",
+    "description": "{{ meta_description }}",
+    "image": "{{ hero_image }}",
+    "telephone": "{{ phone }}",
+    "priceRange": "KES {{ price_per_night }}/night",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "{{ area }}",
+      "addressRegion": "{{ city }}",
+      "addressCountry": "KE"
+    }{% if coordinates %},
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": {{ coordinates.lat }},
+      "longitude": {{ coordinates.lng }}
+    }{% endif %}{% if map_embed_url %},
+    "hasMap": "{{ map_embed_url }}"{% endif %}{% if reviews %},
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{ (reviews | map(attribute='rating') | sum / reviews | length) | round(1) }}",
+      "reviewCount": "{{ reviews | length }}"
+    }{% endif %},
+    "amenityFeature": [{% for a in amenities %}{"@type":"LocationFeatureSpecification","name":"{{ a }}","value":true}{% if not loop.last %},{% endif %}{% endfor %}]{% if booking_link %},
+    "url": "{{ booking_link }}"{% endif %}
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:    #0D7C3B;
+      --forest-bg: #E8F5EC;
+      --terracotta: #C67B5C;
+      --gold:      #B8860B;
+      --cream:     #F5F0E1;
+      --earth:     #2D1B11;
+      --sand:      #E8DDD0;
+      --white:     #FFFFFF;
+      --muted:     #8B7E74;
+      --radius:    16px;
+      --radius-sm: 12px;
+      --shadow:    0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
+      --shadow-lg: 0 4px 12px rgba(0,0,0,.08), 0 8px 32px rgba(0,0,0,.1);
+      --font-display: 'Playfair Display SC', serif;
+      --font-body: 'Karla', sans-serif;
+      --w: 900px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--earth);
+      background: var(--cream);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── STICKY NAV ── */
+    .nav-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 20px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      transform: translateY(-100%);
+      transition: transform .25s ease, box-shadow .25s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-bar.visible {
+      transform: translateY(0);
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      border-bottom-color: var(--sand);
+    }
+    .nav-bar .nav-name {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--forest);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 60%;
+    }
+    .nav-bar .nav-cta {
+      background: var(--forest);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: .85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .nav-bar .nav-cta:hover { background: #0a632f; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%; height: 100vh; min-height: 500px;
+      overflow: hidden;
+      background: var(--earth);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('{{ hero_image }}');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    @media (max-width: 768px) {
+      .hero-bg { background-attachment: scroll; }
+      .hero { height: 85vh; min-height: 420px; }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,.82) 0%,
+        rgba(0,0,0,.35) 40%,
+        rgba(0,0,0,.15) 70%,
+        rgba(0,0,0,.25) 100%
+      );
+      display: flex; flex-direction: column;
+      justify-content: flex-end; align-items: center;
+      padding: clamp(24px, 6vw, 48px) clamp(16px, 4vw, 32px);
+      color: #fff;
+      text-align: center;
+    }
+    .hero-overlay h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      max-width: 700px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    .hero-overlay .hero-tagline {
+      margin-top: clamp(8px, 2vw, 14px);
+      font-size: clamp(.9rem, 2vw, 1.15rem);
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,.6);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 6px 18px;
+      border-radius: 999px;
+      display: inline-block;
+      max-width: 500px;
+    }
+    }
+    .hero-overlay .hero-price {
+      display: inline-block;
+      margin-top: clamp(14px, 3vw, 20px);
+      background: var(--forest);
+      color: #fff;
+      font-weight: 700;
+      font-size: clamp(.85rem, 1.8vw, 1.05rem);
+      padding: 8px 20px;
+      border-radius: 999px;
+      letter-spacing: .02em;
+    }
+    /* ── CONTAINER & SECTIONS ── */
+    .container {
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--sand);
+    }
+    section:last-of-type { border-bottom: none; }
+    .section-label {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    p { font-size: .95rem; color: var(--earth); }
+
+    /* ── BADGES ── */
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .badge {
+      background: var(--forest-bg);
+      color: var(--forest);
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(13,124,59,.15);
+    }
+
+    /* ── MAP ── */
+    .map-wrap {
+      margin-top: 16px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--sand);
+    }
+    .map-wrap iframe {
+      width: 100%; height: 280px;
+      border: none; display: block;
+    }
+
+    /* ── PHOTO GRID ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .photo-grid img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      display: block;
+      cursor: pointer;
+      background: var(--sand);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .photo-grid img:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.92);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: auto; }
+    .lightbox img {
+      max-width: 92vw; max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .lightbox-close {
+      position: absolute; top: 16px; right: 20px;
+      background: none; border: none;
+      color: #fff; font-size: 2rem;
+      cursor: pointer; line-height: 1;
+      opacity: .7; transition: opacity .2s;
+      z-index: 10;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.12);
+      border: none; color: #fff;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,.25); }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* ── AMENITIES ── */
+    .amenity-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 16px;
+      margin-top: 4px;
+    }
+    .amenity {
+      display: flex; align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+      padding: 10px 14px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--sand);
+    }
+    .amenity-icon {
+      width: 36px; height: 36px;
+      background: var(--forest-bg);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    @media (max-width: 480px) {
+      .amenity-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 4px;
+    }
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .review-stars {
+      color: var(--gold);
+      font-size: .9rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .review-text {
+      font-size: .9rem;
+      color: var(--earth);
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .review-author {
+      margin-top: 10px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* ── BOOKING CARD ── */
+    .booking-card {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .booking-card .big-price {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1;
+    }
+    .booking-card .per-night {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .booking-card .btn-stack {
+      display: flex; flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity .15s, transform .15s, box-shadow .15s;
+      width: fit-content;
+      min-width: 200px;
+    }
+    .btn:hover { opacity: .92; box-shadow: var(--shadow); }
+    .btn:active { transform: scale(.98); }
+    .btn-airbnb { background: #FF385C; color: #fff; }
+    .btn-wa     { background: #25D366; color: #fff; }
+    .btn-call   {
+      background: var(--white);
+      color: var(--forest);
+      border: 2px solid var(--forest);
+    }
+    .btn-call:hover { background: var(--forest-bg); }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      text-align: center;
+      padding: 28px 16px;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--sand);
+      margin-top: 8px;
+    }
+    .page-footer a {
+      color: var(--forest);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .page-footer a:hover { text-decoration: underline; }
+
+    /* ── MOBILE STICKY FOOTER ── */
+    .mobile-footer {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(0,0,0,.06);
+      padding: 12px 16px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 24px rgba(0,0,0,.08);
+      border-radius: 16px 16px 0 0;
+      flex-direction: column;
+      gap: 10px;
+    }
+    @media (max-width: 768px) {
+      .mobile-footer { display: flex; }
+      .nav-bar .nav-cta { font-size: .78rem; padding: 6px 14px; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .mobile-footer .mf-buttons {
+      display: flex; gap: 10px;
+    }
+    .mobile-footer .mf-btn {
+      flex: 1;
+      padding: 13px 16px;
+      font-size: .88rem;
+      font-weight: 700;
+      border-radius: 999px;
+      text-decoration: none;
+      text-align: center;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      transition: transform .15s, box-shadow .15s, opacity .15s;
+    }
+    .mobile-footer .mf-btn:active {
+      transform: scale(.97);
+    }
+    .mobile-footer .mf-btn-wa {
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(37,211,102,.35);
+      flex: 1.4;
+    }
+    .mobile-footer .mf-btn-wa svg {
+      width: 20px; height: 20px; flex-shrink: 0;
+    }
+    .mobile-footer .mf-btn-call {
+      background: var(--white);
+      color: var(--forest);
+      border: 1.5px solid var(--sand);
+      flex: 1;
+    }
+    .mobile-footer .mf-btn-call:hover {
+      border-color: var(--forest);
+      background: var(--forest-bg);
+    }
+
+    /* body padding so mobile footer doesn't cover content */
+    @media (max-width: 768px) {
+      body { padding-bottom: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="nav-bar" id="navBar">
+  <span class="nav-name">{{ property_name }}</span>
+  <a href="#booking" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg" role="img" aria-label="{{ property_name }} furnished rental in {{ area }}, {{ city }}"></div>
+  <div class="hero-overlay">
+    <h1>{{ property_name }}</h1>
+    <p class="hero-tagline">{{ tagline }}</p>
+    <span class="hero-price">KES {{ "{:,}".format(price_per_night) }} / night</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- LOCATION -->
+  <section id="location">
+    <p class="section-label">Location</p>
+    <h2 class="section-title">{{ area }}, {{ city }}</h2>
+    <p>{{ location_description }}</p>
+    <div class="badges">
+      {% for lm in landmarks %}
+      <span class="badge">Near {{ lm }}</span>
+      {% endfor %}
+    </div>
+    {% if map_embed_url %}
+    <div class="map-wrap">
+      <iframe src="{{ map_embed_url }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- PHOTOS -->
+  {% if extra_images %}
+  <section id="photos">
+    <p class="section-label">Gallery</p>
+    <h2 class="section-title">Inside the Property</h2>
+    <div class="photo-grid" id="photoGrid">
+      {% for img in extra_images %}
+      <img src="{{ img }}" alt="{{ property_name }} — photo {{ loop.index }}" loading="lazy" data-full="{{ img }}" data-index="{{ loop.index0 }}" />
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- AMENITIES -->
+  <section id="amenities">
+    <p class="section-label">Amenities</p>
+    <h2 class="section-title">What's Included</h2>
+    <div class="amenity-grid">
+      {% for a in amenities %}
+      <div class="amenity">
+        <span class="amenity-icon">{{ icon_for(a) }}</span>
+        <span>{{ a }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  {% if reviews %}
+  <section id="reviews">
+    <p class="section-label">Guest Reviews</p>
+    <h2 class="section-title">What Guests Say</h2>
+    <div class="reviews-grid">
+      {% for r in reviews %}
+      <div class="review-card">
+        <div class="review-stars">{% for i in range(r.rating) %}&#9733;{% endfor %}{% for i in range(5 - r.rating) %}&#9734;{% endfor %}</div>
+        <p class="review-text">&ldquo;{{ r.text }}&rdquo;</p>
+        <p class="review-author">&mdash; {{ r.author }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <p class="section-label">Book a Stay</p>
+    <h2 class="section-title">Ready to Book?</h2>
+    <div class="booking-card">
+      <div class="big-price">KES {{ "{:,}".format(price_per_night) }}</div>
+      <div class="per-night">per night &middot; min {{ min_nights }} night{{ "s" if min_nights != 1 else "" }}</div>
+      <div class="btn-stack">
+        {% if booking_link %}
+        <a href="{{ booking_link }}" class="btn btn-airbnb" target="_blank" rel="noopener">
+          &#127968; Book on {{ booking_platform }}
+        </a>
+        {% endif %}
+        <a href="https://wa.me/{{ whatsapp }}" class="btn btn-wa" target="_blank" rel="noopener">
+          &#128172; WhatsApp Direct Booking
+        </a>
+        <a href="tel:{{ phone }}" class="btn btn-call">
+          &#128222; Call {{ phone }}
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  {{ property_name }} &middot; {{ area }}, {{ city }}, Kenya<br />
+  <a href="../">Powered by Nestly Africa</a> &mdash; independent web presence for BnB hosts
+</footer>
+
+<!-- MOBILE STICKY FOOTER -->
+<div class="mobile-footer" id="mobileFooter">
+  <div class="mf-buttons">
+    <a href="https://wa.me/{{ whatsapp }}" class="mf-btn mf-btn-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="tel:{{ phone }}" class="mf-btn mf-btn-call">
+      Call
+    </a>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&rsaquo;</button>
+  <img src="" alt="" id="lightboxImg" />
+</div>
+
+<script>
+  // ── Sticky Nav ──
+  (function() {
+    var nav = document.getElementById('navBar');
+    var hero = document.querySelector('.hero');
+    if (!nav || !hero) return;
+    var obs = new IntersectionObserver(function(entries) {
+      nav.classList.toggle('visible', !entries[0].isIntersecting);
+    }, { threshold: 0 });
+    obs.observe(hero);
+  })();
+
+  // ── Lightbox ──
+  (function() {
+    var photos = document.querySelectorAll('#photoGrid img[data-full]');
+    if (!photos.length) return;
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightboxImg');
+    var currentIdx = 0;
+    var images = [];
+
+    photos.forEach(function(img, i) {
+      images.push({ src: img.getAttribute('data-full'), alt: img.alt });
+      img.addEventListener('click', function() { openLightbox(i); });
+    });
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      lbImg.src = images[idx].src;
+      lbImg.alt = images[idx].alt;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(delta) {
+      currentIdx = (currentIdx + delta + images.length) % images.length;
+      lbImg.src = images[currentIdx].src;
+      lbImg.alt = images[currentIdx].alt;
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', function() { navigate(-1); });
+    document.getElementById('lightboxNext').addEventListener('click', function() { navigate(1); });
+    lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', function(e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  })();
+
+  // ── Mobile footer: hide when near footer ──
+  (function() {
+    var mf = document.getElementById('mobileFooter');
+    var footer = document.querySelector('.page-footer');
+    if (!mf || !footer) return;
+    var obs = new IntersectionObserver(function(entries) {
+      mf.style.display = entries[0].isIntersecting ? 'none' : 'flex';
+    }, { threshold: 0 });
+    obs.observe(footer);
+  })();
+</script>
+
+</body>
+</html>

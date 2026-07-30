@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO ── -->
+  <title>{{ property_name }} – Furnished Rental in {{ area }}, {{ city }}</title>
+  <meta name="description" content="{{ meta_description }}" />
+  <meta name="keywords" content="BnB near {{ area }}, furnished apartment {{ city }}, short stay {{ area }}, {{ keywords }}" />
+
+  <!-- ── Open Graph (WhatsApp / social previews) ── -->
+  <meta property="og:title" content="{{ property_name }} – {{ area }} Furnished Rental" />
+  <meta property="og:description" content="{{ meta_description }}" />
+  <meta property="og:image" content="{{ hero_image }}" />
+  <meta property="og:type" content="website" />
+
+  <!-- ── Schema markup – helps AI & Google understand the listing ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "{{ property_name }}",
+    "description": "{{ meta_description }}",
+    "image": "{{ hero_image }}",
+    "telephone": "{{ phone }}",
+    "priceRange": "KES {{ price_per_night }}/night",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ street_address }}",
+      "addressLocality": "{{ area }}",
+      "addressRegion": "{{ city }}",
+      "addressCountry": "KE"
+    },
+    "amenityFeature": [
+      {% for amenity in amenities %}"{{ amenity }}"{% if not loop.last %},{% endif %}{% endfor %}
+    ],
+    "url": "{{ booking_link }}"
+  }
+  </script>
+
+  <link rel="stylesheet" href="../../template/style.css" />
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <img src="{{ hero_image }}" alt="{{ property_name }} in {{ area }}, {{ city }}" />
+    <div class="hero-overlay">
+      <h1>{{ property_name }}</h1>
+      <p class="tagline">{{ tagline }}</p>
+    </div>
+  </div>
+
+  <!-- ── LOCATION ── -->
+  <section>
+    <h2>📍 Location</h2>
+    <p>{{ location_description }}</p>
+    <div class="badges">
+      {% for landmark in landmarks %}
+      <span class="badge">Near {{ landmark }}</span>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ── PHOTOS ── -->
+  {% if extra_images %}
+  <section>
+    <h2>🏠 Inside the Property</h2>
+    <div class="photo-grid">
+      {% for img in extra_images %}
+      <img src="{{ img }}" alt="{{ property_name }} photo" loading="lazy" />
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- ── AMENITIES ── -->
+  <section>
+    <h2>✅ What's Included</h2>
+    <div class="amenity-list">
+      {% for amenity in amenities %}
+      <div class="amenity-item">{{ amenity }}</div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ── PRICING & BOOKING ── -->
+  <section>
+    <h2>💰 Pricing & Booking</h2>
+    <div class="price-tag">KES {{ price_per_night }}<span style="font-size:1rem;font-weight:400">/night</span></div>
+    <p class="price-note">Minimum stay: {{ min_nights }} night{{ 's' if min_nights != 1 else '' }} · Contact for weekly/monthly rates</p>
+    <div class="btn-group">
+      {% if booking_link %}
+      <a href="{{ booking_link }}" class="btn btn-primary" target="_blank" rel="noopener">Book on {{ booking_platform }}</a>
+      {% endif %}
+      <a href="https://wa.me/{{ whatsapp }}" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp to Book</a>
+      <a href="tel:{{ phone }}" class="btn btn-secondary">📞 Call {{ phone }}</a>
+    </div>
+  </section>
+
+  <footer>
+    {{ property_name }} · {{ area }}, {{ city }}, Kenya
+  </footer>
+
+</body>
+</html>

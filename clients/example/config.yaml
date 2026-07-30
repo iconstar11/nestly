@@ -1,0 +1,61 @@
+# ── CLIENT CONFIG ──────────────────────────────────────────────────────────
+# Fill this in from the host's Airbnb listing + cold call notes.
+# Run: python generate.py clients/example
+# ───────────────────────────────────────────────────────────────────────────
+
+property_name: "Westlands Cozy Studio"
+tagline: "Fully furnished, fast WiFi, 5 min from 2 Rivers Mall"
+
+# Location
+area: "Westlands"
+city: "Nairobi"
+street_address: "Waiyaki Way"   # general area is fine, no need for exact address
+
+# Landmarks — these are what people type into Google / AI chatbots
+landmarks:
+  - "2 Rivers Mall"
+  - "Westgate Mall"
+  - "ABC Place"
+  - "Sarit Centre"
+  - "Westlands CBD"
+
+# Extra keywords for SEO meta tag (comma-separated, no quotes needed)
+keywords: "airbnb westlands nairobi, short stay nairobi, furnished apartment westlands"
+
+# Description shown in Google search results (keep under 155 chars)
+meta_description: "Cozy furnished studio in Westlands, Nairobi. 5 min from 2 Rivers Mall. Fast WiFi, full kitchen, secure parking. Book direct or on Airbnb."
+
+# Location paragraph shown on page
+location_description: >
+  Tucked in the heart of Westlands, just 5 minutes from 2 Rivers Mall and a short
+  drive from Westgate and Sarit Centre. Easy access to the Nairobi Expressway.
+
+# Pricing
+price_per_night: 7500
+min_nights: 1
+
+# Images — use direct URLs from the host's listing or uploaded files
+# For MVP: right-click Airbnb image → Copy image address
+hero_image: "https://example.com/images/hero.jpg"
+extra_images:
+  - "https://example.com/images/living.jpg"
+  - "https://example.com/images/bedroom.jpg"
+  - "https://example.com/images/kitchen.jpg"
+  - "https://example.com/images/bathroom.jpg"
+
+# Amenities (keep it to 8–12 items)
+amenities:
+  - "Free WiFi (50 Mbps)"
+  - "Full kitchen"
+  - "Smart TV + Netflix"
+  - "Hot shower"
+  - "Air conditioning"
+  - "Secure parking"
+  - "Washing machine"
+  - "24/7 security"
+
+# Contact & booking
+phone: "+254 712 345 678"
+whatsapp: "254712345678"   # no + or spaces
+booking_link: "https://airbnb.com/rooms/12345678"
+booking_platform: "Airbnb"
