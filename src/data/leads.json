@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "businessName": "Haven Stays Airbnb",
+    "instagram": "havenstaysairbnbs",
+    "followers": "1,579",
+    "property": "Studio AirBnB Ngong road",
+    "location": "Ngong Road, Nairobi",
+    "phone": "0702597406",
+    "source": "instagram_ad"
+  },
+  {
+    "id": 2,
+    "businessName": "Anga Homes",
+    "instagram": "angahomes",
+    "followers": "11K",
+    "properties": ["Studio/Airbnb Ngara (CBD)", "Cosy Studio Kilimani"],
+    "locations": ["Ngara, Nairobi CBD", "Kilimani, Nairobi"],
+    "phone": "0729289584",
+    "source": "instagram_ad"
+  },
+  {
+    "id": 3,
+    "businessName": "Lushlyn Homes",
+    "instagram": "lushlyn_homes",
+    "amenities": ["Gym", "Pool", "Secure parking", "Garden"],
+    "locations": ["Kileleshwa", "Lavington"],
+    "phone": "+254713324587",
+    "source": "instagram_ad"
+  },
+  {
+    "id": 4,
+    "businessName": "BnB Gurus",
+    "facebook": "BnB Gurus (149 Likes)",
+    "services": ["Housing Assistance Service", "Interior Design Studio"],
+    "phone": "+254791884720",
+    "source": "facebook_profile"
+  },
+  {
+    "id": 5,
+    "businessName": "Urbanpoint Properties",
+    "property": "1 Bedroom Furnished Apartment",
+    "location": "Nyali, Mombasa",
+    "priceNight": "Kes 5,000",
+    "perks": "SGR and transfers available",
+    "phone": ["+254726763061", "+254777763061"],
+    "source": "instagram_ad"
+  },
+  {
+    "id": 6,
+    "businessName": "Four Point Stays Nairobi",
+    "instagram": "fourpointstaysnairobi",
+    "followers": "9,009",
+    "tagline": "Home away from home, but better.",
+    "useCases": ["Weekend Getaways", "Workcations", "Special Occasions", "Just Because"],
+    "phone": "0722822381",
+    "source": "instagram_ad"
+  },
+  {
+    "id": 7,
+    "businessName": "Lilien Homes",
+    "badge": "Superhost",
+    "property": "1 Bedroom Home Stay",
+    "location": "Thika Town",
+    "tagline": "Your cozy comfort away from home",
+    "phone": "0794296092",
+    "source": "instagram_ad"
+  },
+  {
+    "id": 8,
+    "businessName": "Coastal Holidays",
+    "phone": "0757813819",
+    "region": "Coast",
+    "source": "instagram_ad"
+  },
+  {
+    "id": 9,
+    "businessName": "Damil Apartments Kenya",
+    "instagram": "damilapartmentskenya",
+    "followers": "3,329",
+    "offer": "Mombasa Airbnb Offer - 2Bdr at Ksh 4,500",
+    "phone": "+254748707258",
+    "location": "Mombasa",
+    "source": "instagram_ad"
+  }
+]
