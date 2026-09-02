@@ -7,33 +7,31 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-32 text-center">
         <p className="text-sm font-semibold tracking-widest text-terracotta uppercase mb-6">
-          African BnB Hosts
+          Short-stay accommodation in Nairobi
         </p>
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-earth leading-tight mb-6">
-          Airbnb Takes 15% of Every Booking.
-          <br />
-          <span className="text-forest">What Do You Have to Show for It?</span>
+          Give your accommodation a professional online presence.
         </h1>
         <p className="text-lg sm:text-xl text-earth/60 max-w-xl mx-auto mb-10 leading-relaxed">
-          We build you a Google-visible landing page so guests find <em>you</em> directly — on search,
-          on ChatGPT, on Claude. Not just Airbnb. And you keep 100% of every direct booking.
+          Get a mobile-friendly property website with your own .site domain, branded email,
+          and direct WhatsApp enquiries.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#calculator"
+            href="#pricing"
             className="bg-gold text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gold/90 transition-all shadow-md hover:shadow-lg"
           >
-            See How Much You're Losing
+            Get your property website
           </a>
           <a
-            href="#how-it-works"
+            href="#portfolio"
             className="text-forest font-semibold px-8 py-4 rounded-full border-2 border-forest/20 hover:border-forest hover:bg-forest/5 transition-all"
           >
-            How It Works
+            View an example
           </a>
         </div>
         <p className="mt-12 text-sm text-earth/40">
-          Trusted by hosts in Nairobi, Lagos, Accra & beyond
+          Built for furnished apartments, serviced apartments, and holiday stays in Nairobi
         </p>
       </div>
     </section>

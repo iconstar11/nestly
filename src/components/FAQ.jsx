@@ -2,28 +2,32 @@ import { useState } from 'react';
 
 const faqs = [
   {
-    q: 'I already have an Airbnb listing. Why do I need this?',
-    a: 'Airbnb owns your guest relationship — not you. When someone searches "BnB near 2 Rivers Mall" on Google or asks ChatGPT for a recommendation, your Airbnb listing might show up, but Airbnb takes 15% and owns the booking. A Nestly page means you show up independently, guests book direct, and you keep 100%. It\'s not instead of Airbnb — it\'s in addition to it.',
-  },
-  {
-    q: 'Will people actually find my page on Google?',
-    a: 'Yes. Every Nestly page is built with landmark-based keywords (e.g., "near Sarit Centre," "Westlands furnished apartment") that match what travelers actually search. We include structured data markup so Google, ChatGPT, and Claude can read your listing like a hotel — with price, amenities, and location all machine-readable. Most hosts have zero web presence outside Airbnb; this changes that.',
-  },
-  {
-    q: 'How fast can you build my page?',
-    a: 'Once you send us your photos and details via WhatsApp, your page is live within 24 hours. Usually faster.',
+    q: 'Who is this for?',
+    a: 'Owners of short-stay accommodation in Nairobi — furnished apartments, serviced apartments, and holiday stays. If guests stay overnight at your property and you want them to find and contact you directly, this is for you.',
   },
   {
     q: 'Do I need to be technical?',
-    a: 'Not at all. You send us your info on WhatsApp, we handle everything technical, and you get a link to share. That\'s it. If you want something changed later, just message us.',
+    a: 'Not at all. You send us your photos and details on WhatsApp, we handle everything technical, and you get a link ready to share. If you want something changed later, just message us.',
   },
   {
-    q: 'What if I don\'t get direct bookings?',
-    a: 'Your page pays for itself with one extra direct booking per month. Most hosts see inquiries within the first few weeks as their page gets indexed by Google. We can\'t guarantee bookings (no one can), but we can guarantee your page is built to the same SEO standards that hotels and professional properties use.',
+    q: 'How long does it take?',
+    a: 'Once we receive your photos and property details, most websites go live within a few days. You\'ll get the link on WhatsApp as soon as it\'s ready to share.',
   },
   {
-    q: 'Can I cancel anytime?',
-    a: 'Yes. The monthly retainer has no contract and no minimum term. If you stop, we take down the page. You own nothing and owe nothing. It\'s that simple.',
+    q: 'Will my website show up on Google?',
+    a: 'Every website includes Google-ready setup: search-friendly page structure, location details, and structured data. This gives your page the technical foundation to be found, but rankings depend on search behaviour and grow over time — we don\'t guarantee specific positions.',
+  },
+  {
+    q: 'Do you handle bookings or take payments?',
+    a: 'No. Your website sends enquiries straight to you on WhatsApp. You confirm availability, agree terms, and take payment directly with your guest — the way you already do.',
+  },
+  {
+    q: 'Can I request changes after my website goes live?',
+    a: 'Yes. Starter includes one revision round. Professional includes two revision rounds and thirty days of minor post-launch updates. After that, additional changes can be arranged as needed.',
+  },
+  {
+    q: 'What happens after the first year?',
+    a: 'The .site domain and branded email are included for the first year. Renewal after the first year is charged separately at the provider\'s current renewal price. Your website itself keeps working — there is no monthly website fee.',
   },
 ];
 
@@ -31,13 +35,13 @@ export default function FAQ() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-24 px-4 bg-white">
+    <section id="faq" className="py-24 px-4 bg-white">
       <div className="max-w-2xl mx-auto">
         <p className="text-sm font-semibold tracking-widest text-terracotta uppercase text-center mb-4">
           FAQ
         </p>
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center text-earth mb-16">
-          Questions Hosts Ask
+          Questions Owners Ask
         </h2>
         <div className="space-y-3">
           {faqs.map((faq, i) => (

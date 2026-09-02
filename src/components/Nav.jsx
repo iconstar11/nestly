@@ -21,8 +21,8 @@ export default function Nav() {
         </a>
         <div className="hidden sm:flex items-center gap-6 text-sm font-medium">
           <a href="#how-it-works" className="text-earth/70 hover:text-forest transition-colors">How It Works</a>
-          <a href="#features" className="text-earth/70 hover:text-forest transition-colors">Features</a>
-          <a href="#portfolio" className="text-earth/70 hover:text-forest transition-colors">Portfolio</a>
+          <a href="#what-you-receive" className="text-earth/70 hover:text-forest transition-colors">What You Receive</a>
+          <a href="#portfolio" className="text-earth/70 hover:text-forest transition-colors">Example</a>
           <a href="#pricing" className="text-earth/70 hover:text-forest transition-colors">Pricing</a>
         </div>
         <a
@@ -31,7 +31,7 @@ export default function Nav() {
           rel="noopener noreferrer"
           className="bg-gold text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors shadow-sm"
         >
-          WhatsApp Us
+          Enquire on WhatsApp
         </a>
       </div>
     </nav>

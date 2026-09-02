@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iconstar11.github.io/nestly/sitemap.xml

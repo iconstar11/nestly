@@ -5,17 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ── SEO ── -->
-  <title>{{ property_name }} – Furnished Rental in {{ area }}, {{ city }}</title>
+  <title>{{ property_name }} – Short-Stay Accommodation in {{ area }}, {{ city }}</title>
   <meta name="description" content="{{ meta_description }}" />
-  <meta name="keywords" content="BnB near {{ area }}, furnished apartment {{ city }}, short stay {{ area }}, {{ keywords }}" />
+  <meta name="keywords" content="short stay {{ area }} {{ city }}, furnished apartment {{ city }}, serviced apartment {{ area }}, guest accommodation {{ area }}, {{ extra_keywords }}" />
+  {% if canonical_url %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% endif %}
 
   <!-- ── Open Graph (WhatsApp / social previews) ── -->
-  <meta property="og:title" content="{{ property_name }} – {{ area }} Furnished Rental" />
+  <meta property="og:title" content="{{ property_name }} – {{ area }}, {{ city }}" />
   <meta property="og:description" content="{{ meta_description }}" />
   <meta property="og:image" content="{{ hero_image }}" />
   <meta property="og:type" content="website" />
+  {% if canonical_url %}
+  <meta property="og:url" content="{{ canonical_url }}" />
+  {% endif %}
 
-  <!-- ── Schema markup – helps AI & Google understand the listing ── -->
+  <!-- ── Schema markup – helps Google & AI understand the property ── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,7 +30,7 @@
     "description": "{{ meta_description }}",
     "image": "{{ hero_image }}",
     "telephone": "{{ phone }}",
-    "priceRange": "KES {{ price_per_night }}/night",
+    "priceRange": "{{ currency }} {{ price_per_night }}/night",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "{{ street_address }}",
@@ -34,8 +40,8 @@
     },
     "amenityFeature": [
       {% for amenity in amenities %}"{{ amenity }}"{% if not loop.last %},{% endif %}{% endfor %}
-    ],
-    "url": "{{ booking_link }}"
+    ]{% if canonical_url %},
+    "url": "{{ canonical_url }}"{% endif %}
   }
   </script>
 
@@ -69,7 +75,7 @@
     <h2>🏠 Inside the Property</h2>
     <div class="photo-grid">
       {% for img in extra_images %}
-      <img src="{{ img }}" alt="{{ property_name }} photo" loading="lazy" />
+      <img src="{{ img }}" alt="{{ image_alt_text[loop.index0] if image_alt_text[loop.index0] else property_name ~ ' photo ' ~ loop.index }}" loading="lazy" />
       {% endfor %}
     </div>
   </section>
@@ -85,22 +91,47 @@
     </div>
   </section>
 
-  <!-- ── PRICING & BOOKING ── -->
+  <!-- ── HOUSE RULES ── -->
+  {% if house_rules %}
   <section>
-    <h2>💰 Pricing & Booking</h2>
-    <div class="price-tag">KES {{ price_per_night }}<span style="font-size:1rem;font-weight:400">/night</span></div>
+    <h2>📋 House Rules</h2>
+    <ul>
+      {% for rule in house_rules %}
+      <li>{{ rule }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <!-- ── FAQ ── -->
+  {% if faqs %}
+  <section>
+    <h2>❓ Frequently Asked Questions</h2>
+    {% for f in faqs %}
+    <details>
+      <summary>{{ f.q }}</summary>
+      <p>{{ f.a }}</p>
+    </details>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <!-- ── PRICING & CONTACT ── -->
+  <section>
+    <h2>💰 Pricing &amp; Contact</h2>
+    <div class="price-tag">{{ currency }} {{ price_per_night }}<span style="font-size:1rem;font-weight:400">/night</span></div>
     <p class="price-note">Minimum stay: {{ min_nights }} night{{ 's' if min_nights != 1 else '' }} · Contact for weekly/monthly rates</p>
     <div class="btn-group">
-      {% if booking_link %}
-      <a href="{{ booking_link }}" class="btn btn-primary" target="_blank" rel="noopener">Book on {{ booking_platform }}</a>
+      <a href="https://wa.me/{{ whatsapp }}" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 Enquire on WhatsApp</a>
+      {% if external_reservation_url %}
+      <a href="{{ external_reservation_url }}" class="btn btn-primary" target="_blank" rel="noopener">{{ external_reservation_label }}</a>
       {% endif %}
-      <a href="https://wa.me/{{ whatsapp }}" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp to Book</a>
       <a href="tel:{{ phone }}" class="btn btn-secondary">📞 Call {{ phone }}</a>
     </div>
   </section>
 
   <footer>
-    {{ property_name }} · {{ area }}, {{ city }}, Kenya
+    {{ property_name }} · {{ area }}, {{ city }}, Kenya · <a href="../">Powered by Nestly Africa</a>
   </footer>
 
 </body>

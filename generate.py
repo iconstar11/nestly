@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BnB Page Generator
+Property Page Generator
 Usage:  python generate.py clients/<folder>
         python generate.py clients/<folder> --open    # open in browser after build
 """
@@ -10,6 +10,9 @@ import yaml
 import subprocess
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
+
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")  # Windows console may default to cp1252
 
 TEMPLATE_DIR = Path(__file__).parent / "template"
 TEMPLATE_FILE = "page.html"
@@ -62,10 +65,37 @@ def load_config(client_dir: Path) -> dict:
         sys.exit(1)
     with open(cfg_path, encoding="utf-8") as f:
         config = yaml.safe_load(f)
+
+    # Migrate legacy fields to the current neutral schema.
+    if config.get("booking_link") and not config.get("external_reservation_url"):
+        config["external_reservation_url"] = config.pop("booking_link")
+    config.pop("booking_platform", None)
+    if config.get("keywords") and not config.get("extra_keywords"):
+        config["extra_keywords"] = config.pop("keywords")
+
     # Defaults for optional fields
-    config.setdefault("reviews", None)
-    config.setdefault("coordinates", None)
-    config.setdefault("map_embed_url", None)
+    defaults = {
+        "property_type": "",
+        "tagline": "",
+        "street_address": "",
+        "house_rules": [],
+        "faqs": [],
+        "image_alt_text": [],
+        "currency": "KES",
+        "email": "",
+        "external_reservation_url": "",
+        "external_reservation_label": "Check availability",
+        "client_domain": "",
+        "branded_email": "",
+        "email_provider": "",
+        "email_setup_included": True,
+        "canonical_url": "",
+        "reviews": None,
+        "coordinates": None,
+        "map_embed_url": None,
+    }
+    for key, value in defaults.items():
+        config.setdefault(key, value)
     return config
 
 
@@ -89,7 +119,7 @@ def generate(client_path: str, open_browser: bool = False):
     area = config.get("area", "")
     print(f"✅  {name} ({area})")
     print(f"    File: {out}")
-    print(f"    URL:  https://<username>.github.io/bnb-pages/{client_dir}/")
+    print(f"    URL:  https://<username>.github.io/nestly/{client_dir.as_posix()}/")
 
     if open_browser:
         subprocess.run(["open", str(out)], check=False)

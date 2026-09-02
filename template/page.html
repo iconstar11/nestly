@@ -6,14 +6,19 @@
 
   <title>{{ property_name }} — {{ area }}, {{ city }} | Nestly Africa</title>
   <meta name="description" content="{{ meta_description }}" />
-  <meta name="keywords" content="BnB {{ area }}, furnished apartment {{ area }} {{ city }}, short stay {{ area }}, airbnb {{ area }} {{ city }}, {{ extra_keywords }}" />
+  <meta name="keywords" content="short stay {{ area }} {{ city }}, furnished apartment {{ area }}, serviced apartment {{ city }}, guest accommodation {{ area }}, {{ extra_keywords }}" />
+  {% if canonical_url %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% endif %}
 
-  <meta property="og:title" content="{{ property_name }} — {{ area }} Furnished Rental" />
+  <meta property="og:title" content="{{ property_name }} — {{ area }}, {{ city }}" />
   <meta property="og:description" content="{{ meta_description }}" />
+  {% if hero_image %}
   <meta property="og:image" content="{{ hero_image }}" />
+  {% endif %}
   <meta property="og:type" content="website" />
-  {% if booking_link %}
-  <meta property="og:url" content="{{ booking_link }}" />
+  {% if canonical_url %}
+  <meta property="og:url" content="{{ canonical_url }}" />
   {% endif %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,12 +30,13 @@
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": "{{ property_name }}",
-    "description": "{{ meta_description }}",
-    "image": "{{ hero_image }}",
-    "telephone": "{{ phone }}",
-    "priceRange": "KES {{ price_per_night }}/night",
+    "description": "{{ meta_description }}"{% if hero_image %},
+    "image": "{{ hero_image }}"{% endif %},
+    "telephone": "{{ phone }}"{% if price_per_night %},
+    "priceRange": "{{ currency }} {{ price_per_night }}/night"{% endif %},
     "address": {
-      "@type": "PostalAddress",
+      "@type": "PostalAddress"{% if street_address %},
+      "streetAddress": "{{ street_address }}"{% endif %},
       "addressLocality": "{{ area }}",
       "addressRegion": "{{ city }}",
       "addressCountry": "KE"
@@ -45,9 +51,9 @@
       "@type": "AggregateRating",
       "ratingValue": "{{ (reviews | map(attribute='rating') | sum / reviews | length) | round(1) }}",
       "reviewCount": "{{ reviews | length }}"
-    }{% endif %},
-    "amenityFeature": [{% for a in amenities %}{"@type":"LocationFeatureSpecification","name":"{{ a }}","value":true}{% if not loop.last %},{% endif %}{% endfor %}]{% if booking_link %},
-    "url": "{{ booking_link }}"{% endif %}
+    }{% endif %}{% if amenities %},
+    "amenityFeature": [{% for a in amenities %}{"@type":"LocationFeatureSpecification","name":"{{ a }}","value":true}{% if not loop.last %},{% endif %}{% endfor %}]{% endif %}{% if canonical_url %},
+    "url": "{{ canonical_url }}"{% endif %}
   }
   </script>
 
@@ -184,7 +190,7 @@
       display: inline-block;
       max-width: 500px;
     }
-    }
+    {% if price_per_night %}
     .hero-overlay .hero-price {
       display: inline-block;
       margin-top: clamp(14px, 3vw, 20px);
@@ -196,6 +202,7 @@
       border-radius: 999px;
       letter-spacing: .02em;
     }
+    {% endif %}
     /* ── CONTAINER & SECTIONS ── */
     .container {
       max-width: var(--w);
@@ -336,6 +343,42 @@
       .amenity-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── HOUSE RULES & FAQ ── */
+    .rule-list {
+      list-style: none;
+      display: grid; gap: 8px;
+    }
+    .rule-list li {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: .9rem;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      cursor: pointer;
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--earth);
+      list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .faq-item summary::after { content: '+'; color: var(--forest); font-size: 1.2rem; }
+    .faq-item[open] summary::after { content: '–'; }
+    .faq-item p {
+      padding: 0 18px 14px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
     /* ── REVIEWS ── */
     .reviews-grid {
       display: grid;
@@ -368,7 +411,7 @@
       color: var(--muted);
     }
 
-    /* ── BOOKING CARD ── */
+    /* ── ENQUIRY CARD ── */
     .booking-card {
       background: var(--white);
       border: 1px solid var(--sand);
@@ -411,9 +454,9 @@
     }
     .btn:hover { opacity: .92; box-shadow: var(--shadow); }
     .btn:active { transform: scale(.98); }
-    .btn-airbnb { background: #FF385C; color: #fff; }
-    .btn-wa     { background: #25D366; color: #fff; }
-    .btn-call   {
+    .btn-wa       { background: #25D366; color: #fff; }
+    .btn-external { background: var(--forest); color: #fff; }
+    .btn-call     {
       background: var(--white);
       color: var(--forest);
       border: 2px solid var(--forest);
@@ -505,16 +548,18 @@
 <!-- STICKY NAV -->
 <nav class="nav-bar" id="navBar">
   <span class="nav-name">{{ property_name }}</span>
-  <a href="#booking" class="nav-cta">Book Now</a>
+  <a href="#booking" class="nav-cta">Check Availability</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-bg" role="img" aria-label="{{ property_name }} furnished rental in {{ area }}, {{ city }}"></div>
+  <div class="hero-bg" role="img" aria-label="{{ property_name }} in {{ area }}, {{ city }}"></div>
   <div class="hero-overlay">
     <h1>{{ property_name }}</h1>
-    <p class="hero-tagline">{{ tagline }}</p>
-    <span class="hero-price">KES {{ "{:,}".format(price_per_night) }} / night</span>
+    {% if tagline %}<p class="hero-tagline">{{ tagline }}</p>{% endif %}
+    {% if price_per_night %}
+    <span class="hero-price">{{ currency }} {{ "{:,}".format(price_per_night) }} / night</span>
+    {% endif %}
   </div>
 </div>
 
@@ -525,11 +570,13 @@
     <p class="section-label">Location</p>
     <h2 class="section-title">{{ area }}, {{ city }}</h2>
     <p>{{ location_description }}</p>
+    {% if landmarks %}
     <div class="badges">
       {% for lm in landmarks %}
       <span class="badge">Near {{ lm }}</span>
       {% endfor %}
     </div>
+    {% endif %}
     {% if map_embed_url %}
     <div class="map-wrap">
       <iframe src="{{ map_embed_url }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -544,13 +591,14 @@
     <h2 class="section-title">Inside the Property</h2>
     <div class="photo-grid" id="photoGrid">
       {% for img in extra_images %}
-      <img src="{{ img }}" alt="{{ property_name }} — photo {{ loop.index }}" loading="lazy" data-full="{{ img }}" data-index="{{ loop.index0 }}" />
+      <img src="{{ img }}" alt="{{ image_alt_text[loop.index0] if image_alt_text[loop.index0] else property_name ~ ' — photo ' ~ loop.index }}" loading="lazy" data-full="{{ img }}" data-index="{{ loop.index0 }}" />
       {% endfor %}
     </div>
   </section>
   {% endif %}
 
   <!-- AMENITIES -->
+  {% if amenities %}
   <section id="amenities">
     <p class="section-label">Amenities</p>
     <h2 class="section-title">What's Included</h2>
@@ -563,6 +611,34 @@
       {% endfor %}
     </div>
   </section>
+  {% endif %}
+
+  <!-- HOUSE RULES -->
+  {% if house_rules %}
+  <section id="house-rules">
+    <p class="section-label">Good to Know</p>
+    <h2 class="section-title">House Rules</h2>
+    <ul class="rule-list">
+      {% for rule in house_rules %}
+      <li>{{ rule }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <!-- FAQ -->
+  {% if faqs %}
+  <section id="faqs">
+    <p class="section-label">Questions</p>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    {% for f in faqs %}
+    <details class="faq-item">
+      <summary>{{ f.q }}</summary>
+      <p>{{ f.a }}</p>
+    </details>
+    {% endfor %}
+  </section>
+  {% endif %}
 
   <!-- REVIEWS -->
   {% if reviews %}
@@ -581,22 +657,24 @@
   </section>
   {% endif %}
 
-  <!-- BOOKING -->
+  <!-- ENQUIRY -->
   <section id="booking">
-    <p class="section-label">Book a Stay</p>
-    <h2 class="section-title">Ready to Book?</h2>
+    <p class="section-label">Check Availability</p>
+    <h2 class="section-title">Ready to Stay?</h2>
     <div class="booking-card">
-      <div class="big-price">KES {{ "{:,}".format(price_per_night) }}</div>
+      {% if price_per_night %}
+      <div class="big-price">{{ currency }} {{ "{:,}".format(price_per_night) }}</div>
       <div class="per-night">per night &middot; min {{ min_nights }} night{{ "s" if min_nights != 1 else "" }}</div>
+      {% endif %}
       <div class="btn-stack">
-        {% if booking_link %}
-        <a href="{{ booking_link }}" class="btn btn-airbnb" target="_blank" rel="noopener">
-          &#127968; Book on {{ booking_platform }}
+        <a href="https://wa.me/{{ whatsapp }}" class="btn btn-wa" target="_blank" rel="noopener">
+          &#128172; Enquire on WhatsApp
+        </a>
+        {% if external_reservation_url %}
+        <a href="{{ external_reservation_url }}" class="btn btn-external" target="_blank" rel="noopener">
+          &#128198; {{ external_reservation_label }}
         </a>
         {% endif %}
-        <a href="https://wa.me/{{ whatsapp }}" class="btn btn-wa" target="_blank" rel="noopener">
-          &#128172; WhatsApp Direct Booking
-        </a>
         <a href="tel:{{ phone }}" class="btn btn-call">
           &#128222; Call {{ phone }}
         </a>
@@ -609,7 +687,7 @@
 <!-- FOOTER -->
 <footer class="page-footer">
   {{ property_name }} &middot; {{ area }}, {{ city }}, Kenya<br />
-  <a href="../">Powered by Nestly Africa</a> &mdash; independent web presence for BnB hosts
+  <a href="../">Powered by Nestly Africa</a> &mdash; property websites for short-stay accommodation
 </footer>
 
 <!-- MOBILE STICKY FOOTER -->
@@ -617,7 +695,7 @@
   <div class="mf-buttons">
     <a href="https://wa.me/{{ whatsapp }}" class="mf-btn mf-btn-wa" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      WhatsApp
+      Enquire on WhatsApp
     </a>
     <a href="tel:{{ phone }}" class="mf-btn mf-btn-call">
       Call

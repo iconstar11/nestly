@@ -2,7 +2,7 @@ import Nav from './components/Nav';
 import Hero from './components/Hero';
 import Calculator from './components/Calculator';
 import HowItWorks from './components/HowItWorks';
-import Features from './components/Features';
+import WhatYouReceive from './components/WhatYouReceive';
 import Portfolio from './components/Portfolio';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
@@ -17,7 +17,7 @@ export default function App() {
         <Hero />
         <Calculator />
         <HowItWorks />
-        <Features />
+        <WhatYouReceive />
         <Portfolio />
         <Pricing />
         <FAQ />

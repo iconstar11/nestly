@@ -4,9 +4,9 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto text-center">
         <p className="font-display text-xl font-bold text-white mb-3 tracking-wide">Nestly Africa</p>
         <p className="text-sm mb-8 max-w-sm mx-auto leading-relaxed">
-          Independent web presence for Nairobi BnB hosts.
+          Property websites for short-stay accommodation in Nairobi.
           <br />
-          Get found on Google and AI — not just Airbnb.
+          Photos, amenities, location, pricing, and direct WhatsApp enquiries — in one shareable link.
         </p>
         <a
           href="https://wa.me/254712345678"
@@ -14,7 +14,7 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-gold text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors mb-8"
         >
-          Message on WhatsApp
+          Enquire on WhatsApp
         </a>
         <p className="text-xs text-white/30">
           &copy; {new Date().getFullYear()} Nestly Africa. All rights reserved.

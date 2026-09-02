@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/prepare-entry.js",
     "build": "vite build && node scripts/copy-to-root.js",
     "preview": "vite preview"
   },

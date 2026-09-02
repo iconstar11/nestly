@@ -1,27 +1,27 @@
 const steps = [
   {
     step: '01',
-    title: 'Share Your Listing',
-    desc: 'Send us your Airbnb link, photos, and a few details on WhatsApp. Takes 15 minutes.',
+    title: 'Share Your Property Details',
+    desc: 'Send us your photos, amenities, prices, and location on WhatsApp. Takes about 15 minutes.',
     icon: '\u{1F4F1}',
   },
   {
     step: '02',
-    title: 'We Build Your Page',
-    desc: 'Within 24 hours, your own landing page is live. SEO-optimized and AI-search ready.',
+    title: 'We Build Your Website',
+    desc: 'A mobile-friendly property website with photo gallery, amenities, location, pricing, and contact details.',
     icon: '\u{1F3D7}',
   },
   {
     step: '03',
-    title: 'Google & AI Find You',
-    desc: 'When guests search "BnB near Westlands," your page shows up on Google, ChatGPT, and Claude.',
+    title: 'Guests Find You',
+    desc: 'Google-ready setup helps your page get discovered by people searching for stays in your area.',
     icon: '\u{1F50D}',
   },
   {
     step: '04',
-    title: 'Guests Book Direct',
-    desc: 'They reach you via WhatsApp or your booking link. No commission. You keep 100%.',
-    icon: '\u{1F4B0}',
+    title: 'Guests Enquire Directly',
+    desc: 'Visitors reach you straight on WhatsApp. You reply to every enquiry yourself.',
+    icon: '\u{1F4AC}',
   },
 ];
 
@@ -33,7 +33,7 @@ export default function HowItWorks() {
           How It Works
         </p>
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center text-earth mb-16">
-          From Airbnb Listing to Your Own Page in 24 Hours
+          From WhatsApp Chat to Live Website
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((s) => (

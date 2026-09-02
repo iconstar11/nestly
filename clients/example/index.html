@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Westlands Cozy Studio — Westlands, Nairobi | Nestly Africa</title>
-  <meta name="description" content="Cozy furnished studio in Westlands, Nairobi. 5 min from 2 Rivers Mall. Fast WiFi, full kitchen, secure parking. Book direct or on Airbnb." />
-  <meta name="keywords" content="BnB Westlands, furnished apartment Westlands Nairobi, short stay Westlands, airbnb Westlands Nairobi, " />
-
-  <meta property="og:title" content="Westlands Cozy Studio — Westlands Furnished Rental" />
-  <meta property="og:description" content="Cozy furnished studio in Westlands, Nairobi. 5 min from 2 Rivers Mall. Fast WiFi, full kitchen, secure parking. Book direct or on Airbnb." />
-  <meta property="og:image" content="https://example.com/images/hero.jpg" />
-  <meta property="og:type" content="website" />
+  <meta name="description" content="Cozy furnished studio in Westlands, Nairobi. 5 min from 2 Rivers Mall. Fast WiFi, full kitchen, secure parking. Enquire directly on WhatsApp." />
+  <meta name="keywords" content="short stay Westlands Nairobi, furnished apartment Westlands, serviced apartment Nairobi, guest accommodation Westlands, short stay nairobi, furnished apartment westlands, guest accommodation nairobi" />
   
-  <meta property="og:url" content="https://airbnb.com/rooms/12345678" />
+
+  <meta property="og:title" content="Westlands Cozy Studio — Westlands, Nairobi" />
+  <meta property="og:description" content="Cozy furnished studio in Westlands, Nairobi. 5 min from 2 Rivers Mall. Fast WiFi, full kitchen, secure parking. Enquire directly on WhatsApp." />
+  
+  <meta property="og:image" content="https://example.com/images/hero.jpg" />
+  
+  <meta property="og:type" content="website" />
   
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,18 +26,18 @@
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": "Westlands Cozy Studio",
-    "description": "Cozy furnished studio in Westlands, Nairobi. 5 min from 2 Rivers Mall. Fast WiFi, full kitchen, secure parking. Book direct or on Airbnb.",
+    "description": "Cozy furnished studio in Westlands, Nairobi. 5 min from 2 Rivers Mall. Fast WiFi, full kitchen, secure parking. Enquire directly on WhatsApp.",
     "image": "https://example.com/images/hero.jpg",
     "telephone": "+254 712 345 678",
     "priceRange": "KES 7500/night",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Waiyaki Way",
       "addressLocality": "Westlands",
       "addressRegion": "Nairobi",
       "addressCountry": "KE"
     },
-    "amenityFeature": [{"@type":"LocationFeatureSpecification","name":"Free WiFi (50 Mbps)","value":true},{"@type":"LocationFeatureSpecification","name":"Full kitchen","value":true},{"@type":"LocationFeatureSpecification","name":"Smart TV + Netflix","value":true},{"@type":"LocationFeatureSpecification","name":"Hot shower","value":true},{"@type":"LocationFeatureSpecification","name":"Air conditioning","value":true},{"@type":"LocationFeatureSpecification","name":"Secure parking","value":true},{"@type":"LocationFeatureSpecification","name":"Washing machine","value":true},{"@type":"LocationFeatureSpecification","name":"24/7 security","value":true}],
-    "url": "https://airbnb.com/rooms/12345678"
+    "amenityFeature": [{"@type":"LocationFeatureSpecification","name":"Free WiFi (50 Mbps)","value":true},{"@type":"LocationFeatureSpecification","name":"Full kitchen","value":true},{"@type":"LocationFeatureSpecification","name":"Smart TV with streaming apps","value":true},{"@type":"LocationFeatureSpecification","name":"Hot shower","value":true},{"@type":"LocationFeatureSpecification","name":"Air conditioning","value":true},{"@type":"LocationFeatureSpecification","name":"Secure parking","value":true},{"@type":"LocationFeatureSpecification","name":"Washing machine","value":true},{"@type":"LocationFeatureSpecification","name":"24/7 security","value":true}]
   }
   </script>
 
@@ -163,9 +164,17 @@
     .hero-overlay .hero-tagline {
       margin-top: clamp(8px, 2vw, 14px);
       font-size: clamp(.9rem, 2vw, 1.15rem);
-      opacity: .9;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,.6);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 6px 18px;
+      border-radius: 999px;
+      display: inline-block;
       max-width: 500px;
     }
+    
     .hero-overlay .hero-price {
       display: inline-block;
       margin-top: clamp(14px, 3vw, 20px);
@@ -177,28 +186,7 @@
       border-radius: 999px;
       letter-spacing: .02em;
     }
-    .hero-scroll {
-      position: absolute; bottom: 28px; left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255,255,255,.7);
-      font-size: .75rem;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      animation: bounce 2s ease-in-out infinite;
-    }
-    .hero-scroll::after {
-      content: '';
-      display: block;
-      width: 1px; height: 28px;
-      background: rgba(255,255,255,.4);
-      margin: 8px auto 0;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-8px); }
-    }
-
+    
     /* ── CONTAINER & SECTIONS ── */
     .container {
       max-width: var(--w);
@@ -339,6 +327,42 @@
       .amenity-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── HOUSE RULES & FAQ ── */
+    .rule-list {
+      list-style: none;
+      display: grid; gap: 8px;
+    }
+    .rule-list li {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: .9rem;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--sand);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      cursor: pointer;
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--earth);
+      list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .faq-item summary::after { content: '+'; color: var(--forest); font-size: 1.2rem; }
+    .faq-item[open] summary::after { content: '–'; }
+    .faq-item p {
+      padding: 0 18px 14px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
     /* ── REVIEWS ── */
     .reviews-grid {
       display: grid;
@@ -371,7 +395,7 @@
       color: var(--muted);
     }
 
-    /* ── BOOKING CARD ── */
+    /* ── ENQUIRY CARD ── */
     .booking-card {
       background: var(--white);
       border: 1px solid var(--sand);
@@ -396,24 +420,27 @@
     }
     .booking-card .btn-stack {
       display: flex; flex-direction: column;
+      align-items: center;
       gap: 10px;
       margin-top: 24px;
     }
     .btn {
-      display: flex; align-items: center; justify-content: center;
+      display: inline-flex; align-items: center; justify-content: center;
       gap: 8px;
-      padding: 14px 20px;
+      padding: 12px 24px;
       border-radius: 999px;
-      font-size: .95rem;
+      font-size: .9rem;
       font-weight: 700;
       text-decoration: none;
       transition: opacity .15s, transform .15s, box-shadow .15s;
+      width: fit-content;
+      min-width: 200px;
     }
     .btn:hover { opacity: .92; box-shadow: var(--shadow); }
     .btn:active { transform: scale(.98); }
-    .btn-airbnb { background: #FF385C; color: #fff; }
-    .btn-wa     { background: #25D366; color: #fff; }
-    .btn-call   {
+    .btn-wa       { background: #25D366; color: #fff; }
+    .btn-external { background: var(--forest); color: #fff; }
+    .btn-call     {
       background: var(--white);
       color: var(--forest);
       border: 2px solid var(--forest);
@@ -440,34 +467,63 @@
     .mobile-footer {
       display: none;
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-      background: var(--white);
-      border-top: 1px solid var(--sand);
-      padding: 10px 16px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
-      box-shadow: 0 -2px 12px rgba(0,0,0,.06);
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(0,0,0,.06);
+      padding: 12px 16px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 24px rgba(0,0,0,.08);
+      border-radius: 16px 16px 0 0;
+      flex-direction: column;
+      gap: 10px;
     }
     @media (max-width: 768px) {
-      .mobile-footer { display: flex; gap: 10px; }
+      .mobile-footer { display: flex; }
       .nav-bar .nav-cta { font-size: .78rem; padding: 6px 14px; }
       .photo-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    .mobile-footer .btn {
-      flex: 1;
-      padding: 12px 14px;
-      font-size: .85rem;
-      border-radius: 999px;
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      display: flex; align-items: center; justify-content: center;
-      gap: 6px;
+    .mobile-footer .mf-buttons {
+      display: flex; gap: 10px;
     }
-    .mobile-footer .btn-wa   { background: #25D366; color: #fff; }
-    .mobile-footer .btn-call { background: var(--white); color: var(--forest); border: 2px solid var(--forest); }
+    .mobile-footer .mf-btn {
+      flex: 1;
+      padding: 13px 16px;
+      font-size: .88rem;
+      font-weight: 700;
+      border-radius: 999px;
+      text-decoration: none;
+      text-align: center;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      transition: transform .15s, box-shadow .15s, opacity .15s;
+    }
+    .mobile-footer .mf-btn:active {
+      transform: scale(.97);
+    }
+    .mobile-footer .mf-btn-wa {
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(37,211,102,.35);
+      flex: 1.4;
+    }
+    .mobile-footer .mf-btn-wa svg {
+      width: 20px; height: 20px; flex-shrink: 0;
+    }
+    .mobile-footer .mf-btn-call {
+      background: var(--white);
+      color: var(--forest);
+      border: 1.5px solid var(--sand);
+      flex: 1;
+    }
+    .mobile-footer .mf-btn-call:hover {
+      border-color: var(--forest);
+      background: var(--forest-bg);
+    }
 
     /* body padding so mobile footer doesn't cover content */
     @media (max-width: 768px) {
-      body { padding-bottom: 72px; }
+      body { padding-bottom: 140px; }
     }
   </style>
 </head>
@@ -476,18 +532,19 @@
 <!-- STICKY NAV -->
 <nav class="nav-bar" id="navBar">
   <span class="nav-name">Westlands Cozy Studio</span>
-  <a href="#booking" class="nav-cta">Book Now</a>
+  <a href="#booking" class="nav-cta">Check Availability</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-bg" role="img" aria-label="Westlands Cozy Studio furnished rental in Westlands, Nairobi"></div>
+  <div class="hero-bg" role="img" aria-label="Westlands Cozy Studio in Westlands, Nairobi"></div>
   <div class="hero-overlay">
     <h1>Westlands Cozy Studio</h1>
     <p class="hero-tagline">Fully furnished, fast WiFi, 5 min from 2 Rivers Mall</p>
+    
     <span class="hero-price">KES 7,500 / night</span>
+    
   </div>
-  <div class="hero-scroll">Scroll</div>
 </div>
 
 <div class="container">
@@ -498,6 +555,7 @@
     <h2 class="section-title">Westlands, Nairobi</h2>
     <p>Tucked in the heart of Westlands, just 5 minutes from 2 Rivers Mall and a short drive from Westgate and Sarit Centre. Easy access to the Nairobi Expressway.
 </p>
+    
     <div class="badges">
       
       <span class="badge">Near 2 Rivers Mall</span>
@@ -512,6 +570,7 @@
       
     </div>
     
+    
   </section>
 
   <!-- PHOTOS -->
@@ -521,19 +580,20 @@
     <h2 class="section-title">Inside the Property</h2>
     <div class="photo-grid" id="photoGrid">
       
-      <img src="https://example.com/images/living.jpg" alt="Westlands Cozy Studio — photo 1" loading="lazy" data-full="https://example.com/images/living.jpg" data-index="0" />
+      <img src="https://example.com/images/living.jpg" alt="Living area with sofa and TV" loading="lazy" data-full="https://example.com/images/living.jpg" data-index="0" />
       
-      <img src="https://example.com/images/bedroom.jpg" alt="Westlands Cozy Studio — photo 2" loading="lazy" data-full="https://example.com/images/bedroom.jpg" data-index="1" />
+      <img src="https://example.com/images/bedroom.jpg" alt="Bedroom with double bed" loading="lazy" data-full="https://example.com/images/bedroom.jpg" data-index="1" />
       
-      <img src="https://example.com/images/kitchen.jpg" alt="Westlands Cozy Studio — photo 3" loading="lazy" data-full="https://example.com/images/kitchen.jpg" data-index="2" />
+      <img src="https://example.com/images/kitchen.jpg" alt="Kitchen with full equipment" loading="lazy" data-full="https://example.com/images/kitchen.jpg" data-index="2" />
       
-      <img src="https://example.com/images/bathroom.jpg" alt="Westlands Cozy Studio — photo 4" loading="lazy" data-full="https://example.com/images/bathroom.jpg" data-index="3" />
+      <img src="https://example.com/images/bathroom.jpg" alt="Bathroom with hot shower" loading="lazy" data-full="https://example.com/images/bathroom.jpg" data-index="3" />
       
     </div>
   </section>
   
 
   <!-- AMENITIES -->
+  
   <section id="amenities">
     <p class="section-label">Amenities</p>
     <h2 class="section-title">What's Included</h2>
@@ -551,7 +611,7 @@
       
       <div class="amenity">
         <span class="amenity-icon">📺</span>
-        <span>Smart TV + Netflix</span>
+        <span>Smart TV with streaming apps</span>
       </div>
       
       <div class="amenity">
@@ -581,26 +641,63 @@
       
     </div>
   </section>
+  
+
+  <!-- HOUSE RULES -->
+  
+  <section id="house-rules">
+    <p class="section-label">Good to Know</p>
+    <h2 class="section-title">House Rules</h2>
+    <ul class="rule-list">
+      
+      <li>Check-in from 2 PM, check-out by 10 AM</li>
+      
+      <li>No smoking inside</li>
+      
+      <li>Quiet hours 10 PM – 7 AM</li>
+      
+      <li>No parties or events</li>
+      
+    </ul>
+  </section>
+  
+
+  <!-- FAQ -->
+  
+  <section id="faqs">
+    <p class="section-label">Questions</p>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    
+    <details class="faq-item">
+      <summary>How far is the nearest mall?</summary>
+      <p>2 Rivers Mall is a 5-minute drive away.</p>
+    </details>
+    
+    <details class="faq-item">
+      <summary>Is parking available?</summary>
+      <p>Yes, secure on-site parking is included.</p>
+    </details>
+    
+  </section>
+  
 
   <!-- REVIEWS -->
   
 
-  <!-- BOOKING -->
+  <!-- ENQUIRY -->
   <section id="booking">
-    <p class="section-label">Book a Stay</p>
-    <h2 class="section-title">Ready to Book?</h2>
+    <p class="section-label">Check Availability</p>
+    <h2 class="section-title">Ready to Stay?</h2>
     <div class="booking-card">
+      
       <div class="big-price">KES 7,500</div>
       <div class="per-night">per night &middot; min 1 night</div>
+      
       <div class="btn-stack">
-        
-        <a href="https://airbnb.com/rooms/12345678" class="btn btn-airbnb" target="_blank" rel="noopener">
-          &#127968; Book on Airbnb
-        </a>
-        
         <a href="https://wa.me/254712345678" class="btn btn-wa" target="_blank" rel="noopener">
-          &#128172; WhatsApp Direct Booking
+          &#128172; Enquire on WhatsApp
         </a>
+        
         <a href="tel:+254 712 345 678" class="btn btn-call">
           &#128222; Call +254 712 345 678
         </a>
@@ -613,17 +710,20 @@
 <!-- FOOTER -->
 <footer class="page-footer">
   Westlands Cozy Studio &middot; Westlands, Nairobi, Kenya<br />
-  <a href="../">Powered by Nestly Africa</a> &mdash; independent web presence for BnB hosts
+  <a href="../">Powered by Nestly Africa</a> &mdash; property websites for short-stay accommodation
 </footer>
 
 <!-- MOBILE STICKY FOOTER -->
 <div class="mobile-footer" id="mobileFooter">
-  <a href="https://wa.me/254712345678" class="btn-wa" target="_blank" rel="noopener">
-    &#128172; WhatsApp
-  </a>
-  <a href="tel:+254 712 345 678" class="btn-call">
-    &#128222; Call
-  </a>
+  <div class="mf-buttons">
+    <a href="https://wa.me/254712345678" class="mf-btn mf-btn-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enquire on WhatsApp
+    </a>
+    <a href="tel:+254 712 345 678" class="mf-btn mf-btn-call">
+      Call
+    </a>
+  </div>
 </div>
 
 <!-- LIGHTBOX -->

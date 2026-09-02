@@ -10,7 +10,7 @@ export default function Portfolio() {
           Our Work
         </p>
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-center text-earth mb-16">
-          Hosts Who Already Have Their Own Page
+          Example Property Website
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {listings.map((l) => (

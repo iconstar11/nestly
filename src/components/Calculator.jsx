@@ -3,9 +3,9 @@ import { useState, useCallback } from 'react';
 export default function Calculator() {
   const [nightlyRate, setNightlyRate] = useState(8000);
   const [nightsPerMonth, setNightsPerMonth] = useState(15);
-  const [commission, setCommission] = useState(15);
+  const [channelFee, setChannelFee] = useState(15);
 
-  const monthlyLoss = Math.round(nightlyRate * nightsPerMonth * (commission / 100));
+  const monthlyLoss = Math.round(nightlyRate * nightsPerMonth * (channelFee / 100));
   const yearlyLoss = monthlyLoss * 12;
 
   const formatKES = useCallback((n) => {
@@ -19,7 +19,8 @@ export default function Calculator() {
           How Much Are You Giving Away?
         </h2>
         <p className="text-center text-earth/60 mb-12 max-w-md mx-auto">
-          Slide to match your numbers. This is what Airbnb keeps — every single month.
+          Slide to match your numbers. This is what third-party channels keep on your earnings —
+          every single month.
         </p>
 
         <div className="bg-white rounded-2xl shadow-sm border border-sand p-8 space-y-8">
@@ -65,16 +66,16 @@ export default function Calculator() {
 
           <div>
             <label className="flex justify-between text-sm font-semibold mb-2">
-              <span>Airbnb Commission</span>
-              <span className="text-forest">{commission}%</span>
+              <span>Channel Fee</span>
+              <span className="text-forest">{channelFee}%</span>
             </label>
             <input
               type="range"
               min={3}
               max={20}
               step={0.5}
-              value={commission}
-              onChange={(e) => setCommission(Number(e.target.value))}
+              value={channelFee}
+              onChange={(e) => setChannelFee(Number(e.target.value))}
               className="w-full h-2 bg-sand rounded-full appearance-none cursor-pointer accent-forest"
             />
             <div className="flex justify-between text-xs text-earth/30 mt-1">
@@ -86,11 +87,11 @@ export default function Calculator() {
           <div className="border-t border-sand pt-6">
             <div className="grid grid-cols-2 gap-4 text-center">
               <div className="bg-red-50 rounded-xl p-4">
-                <p className="text-xs text-red-500 font-semibold uppercase tracking-wide mb-1">Monthly OTA Fees</p>
+                <p className="text-xs text-red-500 font-semibold uppercase tracking-wide mb-1">Monthly Channel Fees</p>
                 <p className="text-2xl font-bold text-red-600">{formatKES(monthlyLoss)}</p>
               </div>
               <div className="bg-red-50 rounded-xl p-4">
-                <p className="text-xs text-red-500 font-semibold uppercase tracking-wide mb-1">Yearly OTA Fees</p>
+                <p className="text-xs text-red-500 font-semibold uppercase tracking-wide mb-1">Yearly Channel Fees</p>
                 <p className="text-2xl font-bold text-red-600">{formatKES(yearlyLoss)}</p>
               </div>
             </div>
@@ -98,15 +99,14 @@ export default function Calculator() {
 
           <div className="bg-forest/5 rounded-xl p-5 text-center">
             <p className="text-earth/70 text-sm mb-1">
-              A Nestly page costs{' '}
-              <strong className="text-forest">
-                {formatKES(nightlyRate)}
-              </strong>{' '}
-              once, then just{' '}
-              <strong className="text-forest">
-                {formatKES(Math.round(nightlyRate * 0.25))}
-              </strong>
-              /month.
+              This month alone, third-party channels would keep{' '}
+              <strong className="text-red-600">{formatKES(monthlyLoss)}</strong> of your earnings.
+            </p>
+            <p className="text-earth/70 text-sm mb-1">
+              A Nestly website costs{' '}
+              <strong className="text-forest">KES 11,000 (Starter)</strong> or{' '}
+              <strong className="text-forest">KES 15,000 (Professional)</strong> once — no monthly
+              fee, no percentage.
             </p>
             <p className="text-forest font-bold">
               You break even in less than <em>one</em> extra direct booking per month.
