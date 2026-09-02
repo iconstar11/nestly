@@ -17,7 +17,7 @@ python generate.py clients/<slug>   # generate a client property page
 
 ## Architecture
 - `src/main.jsx` — entry point, mounts React to `#root` in `src/index.html` (Vite entry)
-- `src/App.jsx` — single-page layout: Nav → Hero → HowItWorks → WhatYouReceive → WhatIsNotIncluded → Portfolio → Pricing → FAQ → Footer → WhatsAppButton
+- `src/App.jsx` — single-page layout: Nav → Hero → Calculator → HowItWorks → WhatYouReceive → Portfolio → Pricing → FAQ → Footer → WhatsAppButton
 - `src/data/listings.js` — portfolio listings data
 - `src/data/leads.json` — lead/sales-prospect data extracted from social media
 - `generate.py` + `template/page.html` — static client page generator (Jinja2 + YAML config per client in `clients/<slug>/config.yaml`)
