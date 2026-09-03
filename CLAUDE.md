@@ -5,14 +5,14 @@ Nestly Africa — professional, mobile-friendly property websites for short-stay
 
 Nestly is NOT a property-management system, a payment system, a reservation system, a guest check-in service, or a guarantee of bookings or Google rankings.
 
-**Stack:** React 19 + Vite 6 + Tailwind CSS 4 (business site) + Python/Jinja2 static generator (client pages). Deployed via GitHub Pages.
+**Stack:** React 19 + Vite 6 + Tailwind CSS 4 (business site) + Python/Jinja2 static generator (client pages). Deployed via GitHub Pages on `nestlyafrica.cloud` (repo root = docroot, `CNAME` file at root; DNS on Cloudflare free plan).
 
 ## Commands
 ```
 npm run dev      # start dev server
 npm run build    # production build + copy to root for GitHub Pages
 npm run preview  # preview production build locally
-python generate.py clients/<slug>   # generate a client property page
+python generate.py stays/<slug>   # generate a client property page
 ```
 
 ## Architecture
@@ -20,10 +20,11 @@ python generate.py clients/<slug>   # generate a client property page
 - `src/App.jsx` — single-page layout: Nav → Hero → Calculator → HowItWorks → WhatYouReceive → Portfolio → Pricing → FAQ → Footer → WhatsAppButton
 - `src/data/listings.js` — portfolio listings data
 - `src/data/leads.json` — lead/sales-prospect data extracted from social media
-- `generate.py` + `template/page.html` — static client page generator (Jinja2 + YAML config per client in `clients/<slug>/config.yaml`)
+- `generate.py` + `template/page.html` — static client page generator (Jinja2 + YAML config per client in `stays/<slug>/config.yaml`; live at `/stays/<slug>/`). On each run it upserts the page's `canonical_url` into both sitemaps
 - `index.html` at project root is the **built output** for GitHub Pages (committed so Pages can serve it)
 - After `npm run build`, a script copies `dist/` contents to root `index.html`
 - `public/robots.txt` and `public/sitemap.xml` are copied into the build
+- `CNAME` at root (nestlyafrica.cloud) is a root-only file the build never touches; `clients/westlands-riverside/` is a redirect stub to `/stays/westlands-riverside/` for old shared links
 
 ## Conventions
 - **Ship fast.** This is pre-revenue. Polish comes after paying customers.

@@ -38,35 +38,35 @@ Update CSV status → `call_done`
 
 ```bash
 # 1. Copy the example client folder
-cp -r clients/example clients/<client-slug>
-# e.g. clients/westlands-jane
+cp -r stays/example stays/<client-slug>
+# e.g. stays/westlands-jane
 
 # 2. Fill in config.yaml with call notes
 # Use AI to help draft meta_description and location_description
 
 # 3. Generate the page
-python generate.py clients/<client-slug>
+python generate.py stays/<client-slug>
 
 # 4. Open and review
-open clients/<client-slug>/index.html
+open stays/<client-slug>/index.html
 ```
 
 ---
 
 ### Step 5 — Deploy (2 min)
 ```bash
-git add clients/<client-slug>/
+git add stays/<client-slug>/
 git commit -m "Add page: <client-slug>"
 git push
 ```
 
 Page is live at:
-`https://<your-github-username>.github.io/nestly/clients/<client-slug>/`
+`https://nestlyafrica.cloud/stays/<client-slug>/`
 
 ---
 
 ### Step 6 — Bitly + deliver (1 min)
-- Go to bitly.com → shorten the GitHub Pages URL
+- Go to bitly.com → shorten the page URL
 - Add Bitly URL to `leads.csv`
 - Send the link to the owner on WhatsApp
 

@@ -12,11 +12,52 @@ git init && git remote add origin https://github.com/<you>/nestly.git
 pip install -r requirements.txt
 
 # 3. Enable GitHub Pages
-# Repo Settings → Pages → Source: Deploy from branch → main / root
+# Repo Settings → Pages → Source: Deploy from branch → master / root
 ```
 
-Your portfolio page will be live at:
-`https://<you>.github.io/nestly/`
+Your business site will be live at:
+`https://nestlyafrica.cloud/` (custom domain — see Deployment below)
+
+---
+
+## Deployment (one-time)
+
+Hosted free on GitHub Pages from the `master` branch (repo root is the docroot;
+built files are committed). Live at **https://nestlyafrica.cloud** — a custom
+domain served by GitHub Pages with DNS on Cloudflare's free plan. The domain is
+registered at Hostinger; the `CNAME` file at the repo root holds the domain.
+
+1. Push the repo (Settings → Pages → Deploy from branch → `master` / root).
+2. Add the site to Cloudflare (free plan) and set Cloudflare's two nameservers on
+   the Hostinger panel (Domain → DNS → Change nameservers). Propagation usually
+   takes under an hour, up to 24–48h.
+3. In Cloudflare DNS, keep any email records, delete any stale web A record, and
+   add (proxy status **DNS only** — GitHub serves its own TLS):
+
+   | Type | Name | Content | Proxy status |
+   |---|---|---|---|
+   | A | @ | 185.199.108.153 | DNS only |
+   | A | @ | 185.199.109.153 | DNS only |
+   | A | @ | 185.199.110.153 | DNS only |
+   | A | @ | 185.199.111.153 | DNS only |
+
+   (These are GitHub Pages' four IPs — the official way to point an apex.
+   Alternative: one `CNAME @ → <user>.github.io` record with Cloudflare CNAME
+   flattening. `www` is intentionally not configured yet; later it can be a
+   CNAME to `<user>.github.io` or a Cloudflare redirect rule to the apex.)
+4. Repo → Settings → Pages → Custom domain: `nestlyafrica.cloud` → Save → wait for
+   the green DNS check → enable **Enforce HTTPS**.
+5. Verify: open https://nestlyafrica.cloud and
+   https://nestlyafrica.cloud/stays/westlands-riverside/ — old github.io links
+   redirect here, and `/clients/westlands-riverside/` is a redirect stub that
+   forwards to the `/stays/` page.
+
+### Future: per-client subdomains / paid-client domains (not built yet)
+
+A single Pages site holds one custom domain, so a client's own domain gets its
+own Pages site: a repo per client site, serve it from that domain, add A/CNAME
+records in Cloudflare, and regenerate the page with `canonical_url` set to that
+domain. Document only — build when a paid client needs it.
 
 ---
 
@@ -24,13 +65,13 @@ Your portfolio page will be live at:
 
 ```bash
 # 1. Copy the template folder
-cp -r clients/example clients/<area-name>
+cp -r stays/example stays/<area-name>
 
 # 2. Fill in the config
-nano clients/<area-name>/config.yaml
+nano stays/<area-name>/config.yaml
 
 # 3. Generate the page
-python generate.py clients/<area-name>
+python generate.py stays/<area-name>
 
 # 4. Add to the portfolio (src/data/listings.js array)
 # copy an existing entry, update slug/name/area/price/image
@@ -39,12 +80,12 @@ python generate.py clients/<area-name>
 npm run build
 
 # 6. Push
-git add clients/<area-name>/ src/data/listings.js index.html
+git add stays/<area-name>/ src/data/listings.js index.html
 git commit -m "Add: <Property Name>"
 git push
 
 # 7. Shorten URL
-# bitly.com → https://<you>.github.io/nestly/clients/<area-name>/
+# bitly.com → https://nestlyafrica.cloud/stays/<area-name>/
 # → bit.ly/xxxxx  ← send this to the owner
 ```
 

@@ -1,6 +1,6 @@
 # ── CLIENT CONFIG ──────────────────────────────────────────────────────────
 # Fill this in from the property owner's details + call notes.
-# Run: python generate.py clients/example
+# Run: python generate.py stays/example
 # ───────────────────────────────────────────────────────────────────────────
 
 property_name: "Westlands Cozy Studio"

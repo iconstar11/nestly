@@ -1,2 +1,2 @@
-date_found,host_name,phone,property_url,area,price_per_night,client_slug,status,video_sent,call_booked,page_live,github_url,bitly_url,package,notes
-2026-01-15,Jane Wambui,+254712345678,,Westlands,7500,westlands-riverside,page_live,yes,yes,yes,https://you.github.io/nestly/clients/westlands-riverside,https://bit.ly/jane-stay,starter,Happy - referred 2 friends
+date_found,host_name,phone,property_url,area,price_per_night,client_slug,status,video_sent,call_booked,page_live,page_url,bitly_url,package,notes
+2026-01-15,Jane Wambui,+254712345678,,Westlands,7500,westlands-riverside,page_live,yes,yes,yes,https://nestlyafrica.cloud/stays/westlands-riverside,https://bit.ly/jane-stay,starter,Happy - referred 2 friends

@@ -16,7 +16,7 @@ export default function Portfolio() {
           {listings.map((l) => (
             <a
               key={l.slug}
-              href={`clients/${l.slug}/`}
+              href={`stays/${l.slug}/`}
               className="group bg-white rounded-2xl overflow-hidden border border-sand hover:shadow-lg hover:-translate-y-1 transition-all"
             >
               <div className="aspect-[16/10] overflow-hidden bg-sand">

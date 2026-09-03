@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Property Page Generator
-Usage:  python generate.py clients/<folder>
-        python generate.py clients/<folder> --open    # open in browser after build
+Usage:  python generate.py stays/<folder>
+        python generate.py stays/<folder> --open    # open in browser after build
 """
 
 import sys
@@ -16,6 +16,15 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
 
 TEMPLATE_DIR = Path(__file__).parent / "template"
 TEMPLATE_FILE = "page.html"
+
+ROOT_DIR = Path(__file__).parent
+SITEMAP_FILES = [ROOT_DIR / "public" / "sitemap.xml", ROOT_DIR / "sitemap.xml"]
+SITEMAP_HEADER = (
+    '<?xml version="1.0" encoding="UTF-8"?>\n'
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    "  <url>\n    <loc>https://nestlyafrica.cloud/</loc>\n  </url>\n"
+    "</urlset>\n"
+)
 
 
 def icon_for(amenity: str) -> str:
@@ -106,6 +115,30 @@ def render(config: dict) -> str:
     return template.render(icon_for=icon_for, **config)
 
 
+def upsert_sitemap(url: str):
+    """Insert this page's <loc> into both sitemaps if not already present.
+
+    public/ is the build source; the root copy is the committed one served by
+    GitHub Pages. Empty canonical_url (e.g. stays/example) is skipped. Entries
+    are never removed here — rewrite public/sitemap.xml by hand if a client
+    folder is renamed or deleted, then rebuild to sync the root copy.
+    """
+    if not url:
+        return
+    entry = f"  <url>\n    <loc>{url}</loc>\n  </url>\n"
+    for path in SITEMAP_FILES:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            text = SITEMAP_HEADER
+        if f"<loc>{url}</loc>" in text:
+            continue
+        closing = text.rfind("</urlset>")
+        text = text[:closing] + entry + text[closing:]
+        path.write_text(text, encoding="utf-8")
+        print(f"    Sitemap: added {path.name}")
+
+
 def generate(client_path: str, open_browser: bool = False):
     client_dir = Path(client_path)
     config = load_config(client_dir)
@@ -117,9 +150,11 @@ def generate(client_path: str, open_browser: bool = False):
 
     name = config.get("property_name", client_dir.name)
     area = config.get("area", "")
+    url = config.get("canonical_url") or f"https://nestlyafrica.cloud/{client_dir.as_posix()}/"
+    upsert_sitemap(config.get("canonical_url", ""))
     print(f"✅  {name} ({area})")
     print(f"    File: {out}")
-    print(f"    URL:  https://<username>.github.io/nestly/{client_dir.as_posix()}/")
+    print(f"    URL:  {url}")
 
     if open_browser:
         subprocess.run(["open", str(out)], check=False)
@@ -128,7 +163,7 @@ def generate(client_path: str, open_browser: bool = False):
 if __name__ == "__main__":
     args = sys.argv[1:]
     if not args:
-        print("Usage: python generate.py clients/<folder> [--open]")
+        print("Usage: python generate.py stays/<folder> [--open]")
         sys.exit(1)
 
     path = args[0]

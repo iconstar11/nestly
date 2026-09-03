@@ -1,10 +1,14 @@
 # Reference
 
 ## Deployment
-- **Live site:** `https://iconstar11.github.io/nestly/` (GitHub Pages from `master` branch, root)
+- **Live site:** `https://nestlyafrica.cloud/` (GitHub Pages from `master` branch, root; `CNAME` file at repo root holds the domain)
 - **Repo:** `https://github.com/iconstar11/nestly`
-- Build output (`index.html` at root) is committed — GitHub Pages serves from there
+- DNS: domain registered at Hostinger, DNS on Cloudflare free plan (4× A records to GitHub Pages IPs, DNS only) — full steps in README's Deployment section
+- Build output (`index.html` at root, `assets/`) is committed — GitHub Pages serves from there
 - `robots.txt` and `sitemap.xml` live in `public/` and are copied to the root by the build
+- `CNAME` is a root-only file the build never touches — do not move it into `public/`
+- `generate.py` inserts a page's `canonical_url` into both sitemaps on every run (skips empty canonical). If a client is renamed or removed, rewrite `public/sitemap.xml` and run `npm run build`
+- Old `iconstar11.github.io/nestly/...` URLs 301 to the apex with the path preserved after the custom domain is active; `/clients/westlands-riverside/` is a redirect stub pointing at `/stays/westlands-riverside/`
 
 ## Tools & services
 - **URL shortening:** Bitly — shorten client page URLs before sending to owners

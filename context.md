@@ -29,7 +29,7 @@ The .site domain and branded email are included for the first year; renewal is b
 ## Key decisions made
 - **One-time pricing, no monthly fees** (Aug 2026) — simpler to sell, no collection overhead
 - **Neutral public language** — never mention booking platforms, platform fees, or competitors on any public page, template, README, sample content, or visible UI. Use: short-stay accommodation, furnished apartment, property owner, direct enquiry, check availability, enquire on WhatsApp
-- **GitHub Pages for hosting** — free, fast, and the owner doesn't need to manage anything
+- **GitHub Pages for hosting** — free, fast, and the owner doesn't need to manage anything. Custom domain `nestlyafrica.cloud` (registered at Hostinger, free DNS via Cloudflare)
 - **Static single-page sites** — no backend, no database, no moving parts. Fast to build, impossible to break
 - **WhatsApp as primary channel** — it's how owners already communicate with guests
 
