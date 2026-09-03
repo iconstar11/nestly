@@ -4,3 +4,6 @@ ui-ux-pro-max-skill/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Lead data — private, never publish (contains personal info)
+pics_leads/
