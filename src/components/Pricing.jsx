@@ -29,6 +29,9 @@ function Check({ gold = false }) {
   return <span className={`font-bold ${gold ? 'text-gold' : 'text-forest'}`}>&#10003;</span>;
 }
 
+const WA_BASE =
+  'Hello Nestly, I would like a website for my accommodation.\nMy property is in: \nMy preferred package is: ';
+
 export default function Pricing() {
   return (
     <section id="pricing" className="py-24 px-4">
@@ -59,7 +62,7 @@ export default function Pricing() {
               ))}
             </ul>
             <a
-              href="https://wa.me/254141722106"
+              href={`https://wa.me/254141722106?text=${encodeURIComponent(WA_BASE + 'Starter')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-forest text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-forest/90 transition-colors"
@@ -86,7 +89,7 @@ export default function Pricing() {
               ))}
             </ul>
             <a
-              href="https://wa.me/254141722106"
+              href={`https://wa.me/254141722106?text=${encodeURIComponent(WA_BASE + 'Professional')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gold text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors"

@@ -1,3 +1,6 @@
+const WA_MESSAGE =
+  'Hello Nestly, I would like a website for my accommodation.\nMy property is in: \nMy preferred package is: ';
+
 export default function Footer() {
   return (
     <footer className="bg-earth text-white/60 py-16 px-4">
@@ -9,7 +12,7 @@ export default function Footer() {
           Photos, amenities, location, pricing, and direct WhatsApp enquiries — in one shareable link.
         </p>
         <a
-          href="https://wa.me/254141722106"
+          href={`https://wa.me/254141722106?text=${encodeURIComponent(WA_MESSAGE)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-gold text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors mb-8"
