@@ -9,7 +9,7 @@ export default function Footer() {
           Photos, amenities, location, pricing, and direct WhatsApp enquiries — in one shareable link.
         </p>
         <a
-          href="https://wa.me/254712345678"
+          href="https://wa.me/254141722106"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-gold text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors mb-8"

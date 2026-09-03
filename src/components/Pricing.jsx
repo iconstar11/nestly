@@ -59,7 +59,7 @@ export default function Pricing() {
               ))}
             </ul>
             <a
-              href="https://wa.me/254712345678"
+              href="https://wa.me/254141722106"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-forest text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-forest/90 transition-colors"
@@ -86,7 +86,7 @@ export default function Pricing() {
               ))}
             </ul>
             <a
-              href="https://wa.me/254712345678"
+              href="https://wa.me/254141722106"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gold text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors"

@@ -26,7 +26,7 @@ export default function Nav() {
           <a href="#pricing" className="text-earth/70 hover:text-forest transition-colors">Pricing</a>
         </div>
         <a
-          href="https://wa.me/254712345678"
+          href="https://wa.me/254141722106"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-gold text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors shadow-sm"
