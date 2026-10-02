@@ -265,15 +265,46 @@
     .lightbox {
       position: fixed; inset: 0; z-index: 200;
       background: rgba(0,0,0,.92);
-      display: flex; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none;
       transition: opacity .25s ease;
+      touch-action: pan-y;
+      overscroll-behavior-x: contain;
     }
     .lightbox.open { opacity: 1; pointer-events: auto; }
-    .lightbox img {
-      max-width: 92vw; max-height: 85vh;
+    .lightbox-track {
+      position: absolute; inset: 0;
+      display: flex;
+      transform: translateX(0);
+      transition: transform .3s ease;
+      will-change: transform;
+    }
+    .lightbox-track.dragging { transition: none; }
+    .lightbox-slide {
+      flex: 0 0 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      padding: 56px 8px;
+      touch-action: pan-y;
+    }
+    .lightbox-slide img {
+      max-width: 86vw; max-height: 78vh;
       object-fit: contain;
       border-radius: 8px;
+      touch-action: pan-y;
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+    .lightbox-counter {
+      position: absolute; bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,.15);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 999px;
+      letter-spacing: .05em;
+      pointer-events: none;
+      z-index: 10;
     }
     .lightbox-close {
       position: absolute; top: 16px; right: 20px;
@@ -294,10 +325,15 @@
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background .2s;
+      z-index: 10;
     }
     .lightbox-nav:hover { background: rgba(255,255,255,.25); }
     .lightbox-prev { left: 16px; }
     .lightbox-next { right: 16px; }
+    @media (max-width: 768px) {
+      .lightbox-nav { display: none; }
+      .lightbox-slide img { max-width: 92vw; max-height: 80vh; }
+    }
 
     /* ── AMENITIES ── */
     .amenity-grid {
@@ -728,10 +764,11 @@
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
+  <div class="lightbox-track" id="lightboxTrack"></div>
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
   <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&lsaquo;</button>
   <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&rsaquo;</button>
-  <img src="" alt="" id="lightboxImg" />
+  <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
 <script>
@@ -746,26 +783,44 @@
     obs.observe(hero);
   })();
 
-  // ── Lightbox ──
+  // ── Lightbox (with swipe) ──
   (function() {
     var photos = document.querySelectorAll('#photoGrid img[data-full]');
     if (!photos.length) return;
     var lb = document.getElementById('lightbox');
-    var lbImg = document.getElementById('lightboxImg');
+    var track = document.getElementById('lightboxTrack');
+    var counter = document.getElementById('lightboxCounter');
     var currentIdx = 0;
-    var images = [];
+    var slideCount = photos.length;
 
     photos.forEach(function(img, i) {
-      images.push({ src: img.getAttribute('data-full'), alt: img.alt });
+      var slide = document.createElement('div');
+      slide.className = 'lightbox-slide';
+      var el = document.createElement('img');
+      el.src = img.getAttribute('data-full');
+      el.alt = img.alt;
+      slide.appendChild(el);
+      track.appendChild(slide);
       img.addEventListener('click', function() { openLightbox(i); });
     });
 
+    function render() {
+      track.style.transform = 'translateX(' + (-100 * currentIdx) + '%)';
+      counter.textContent = (currentIdx + 1) + ' / ' + slideCount;
+    }
+
+    var lbHasHistory = false; // true while a history entry is pushed for the open lightbox
+
     function openLightbox(idx) {
       currentIdx = idx;
-      lbImg.src = images[idx].src;
-      lbImg.alt = images[idx].alt;
+      track.classList.remove('dragging');
+      render();
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
+      if (!lbHasHistory) {
+        history.pushState({ nestlyLightbox: true }, '');
+        lbHasHistory = true;
+      }
     }
 
     function closeLightbox() {
@@ -773,19 +828,81 @@
       document.body.style.overflow = '';
     }
 
-    function navigate(delta) {
-      currentIdx = (currentIdx + delta + images.length) % images.length;
-      lbImg.src = images[currentIdx].src;
-      lbImg.alt = images[currentIdx].alt;
+    // Explicit close (X, Escape, backdrop): also remove the history entry we pushed,
+    // so the next back press doesn't land on a dead entry.
+    function closeAndRemoveHistory() {
+      if (!lbHasHistory) return;
+      lbHasHistory = false;
+      closeLightbox();
+      history.back();
     }
 
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    // Browser back / Android back / iOS swipe-back closes the gallery
+    // instead of leaving the client's page.
+    window.addEventListener('popstate', function() {
+      lbHasHistory = false;
+      if (lb.classList.contains('open')) closeLightbox();
+    });
+
+    function navigate(delta) {
+      currentIdx = (currentIdx + delta + slideCount) % slideCount;
+      render();
+    }
+
+    // ── Swipe (pointer events: touch + mouse drag) ──
+    var drag = { active: false, startX: 0, startY: 0, dx: 0, moved: false };
+    var suppressClick = false;
+
+    track.addEventListener('pointerdown', function(e) {
+      if (slideCount < 2 || e.target.tagName === 'BUTTON') return;
+      drag.active = true;
+      drag.moved = false;
+      drag.startX = e.clientX;
+      drag.startY = e.clientY;
+      drag.dx = 0;
+      track.classList.add('dragging');
+    });
+
+    document.addEventListener('pointermove', function(e) {
+      if (!drag.active) return;
+      var dx = e.clientX - drag.startX;
+      var dy = e.clientY - drag.startY;
+      if (!drag.moved && Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      drag.moved = true;
+      drag.dx = dx;
+      track.style.transform = 'translateX(' + (-100 * currentIdx + dx / track.clientWidth * 100) + '%)';
+    });
+
+    function endDrag() {
+      if (!drag.active) return;
+      drag.active = false;
+      track.classList.remove('dragging');
+      if (drag.moved) suppressClick = true;
+      var threshold = track.clientWidth * 0.2;
+      if (drag.moved && Math.abs(drag.dx) > threshold) {
+        navigate(drag.dx < 0 ? 1 : -1);
+      } else {
+        render(); // snap back
+      }
+    }
+
+    document.addEventListener('pointerup', endDrag);
+    document.addEventListener('pointercancel', endDrag);
+
+    // Backdrop tap closes (not on a photo, not right after a swipe)
+    lb.addEventListener('click', function(e) {
+      if (suppressClick) { suppressClick = false; return; }
+      if (e.target === track || e.target === lb || e.target.classList.contains('lightbox-slide')) {
+        closeAndRemoveHistory();
+      }
+    });
+
+    document.getElementById('lightboxClose').addEventListener('click', closeAndRemoveHistory);
     document.getElementById('lightboxPrev').addEventListener('click', function() { navigate(-1); });
     document.getElementById('lightboxNext').addEventListener('click', function() { navigate(1); });
-    lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
     document.addEventListener('keydown', function(e) {
       if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') closeAndRemoveHistory();
       if (e.key === 'ArrowLeft') navigate(-1);
       if (e.key === 'ArrowRight') navigate(1);
     });

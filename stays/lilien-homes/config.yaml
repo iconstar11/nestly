@@ -1,0 +1,92 @@
+# ── CLIENT CONFIG ──────────────────────────────────────────────────────────
+# Lilien Homes — lead #7 (Instagram ad). FREE SAMPLE per WORKFLOW.md Phase 0.
+# TO CONFIRM BEFORE OUTREACH: real photos, price, phone, amenities.
+# Run: python generate.py stays/lilien-homes
+# ───────────────────────────────────────────────────────────────────────────
+
+property_name: "Lilien Homes"
+tagline: "Your cozy comfort away from home"
+property_type: "1 Bedroom home stay"
+
+# Location
+area: "Thika Town"
+city: "Kiambu"
+street_address: ""
+
+# Landmarks — these are what people type into Google
+landmarks:
+  - "Thika Road Mall"
+  - "Chania Falls"
+  - "Fourteen Falls"
+  - "Blue Post Hotel"
+  - "Mount Kenya University"
+
+# Extra keywords for SEO meta tag (comma-separated, no quotes needed)
+extra_keywords: "short stay thika, home stay thika, furnished apartment kiambu, guest accommodation thika"
+
+# Description shown in Google search results (keep under 155 chars)
+meta_description: "Cozy 1-bedroom home stay in Thika Town. Superhost-quality comfort, fast WiFi, secure compound. Enquire directly on WhatsApp."
+
+# Location paragraph shown on page
+location_description: >
+  Tucked in Thika Town, a short drive from Thika Road Mall and close to Chania
+  and Fourteen Falls. Quiet, secure neighbourhood — ideal for work trips,
+  weekend getaways, and longer stays.
+
+# Pricing — TO CONFIRM with the owner before outreach (unset hides the price)
+# price_per_night: 3000
+currency: "KES"
+min_nights: 1
+
+# Images — placeholder photos for the sample; swap in the owner's real photos
+hero_image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=85&fit=crop"
+extra_images:
+  - "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80&fit=crop"
+  - "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=80&fit=crop"
+  - "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=600&q=80&fit=crop"
+  - "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80&fit=crop"
+image_alt_text:
+  - "Living area with sofa and warm lighting"
+  - "Bedroom with neatly made bed"
+  - "Kitchen with full equipment"
+  - "Bathroom with shower"
+
+# Amenities (placeholders — confirm with the owner)
+amenities:
+  - "Free WiFi"
+  - "Full kitchen"
+  - "Smart TV with streaming apps"
+  - "Hot shower"
+  - "Secure parking"
+  - "24/7 security"
+  - "Washing machine"
+  - "Backup power"
+
+house_rules:
+  - "Check-in from 2 PM, check-out by 10 AM"
+  - "No smoking inside"
+  - "Quiet hours 10 PM – 7 AM"
+  - "No parties or events"
+
+faqs:
+  - q: "How far is Thika Road Mall?"
+    a: "A short drive from the property — about 5 minutes by car."
+  - q: "Is parking available?"
+    a: "Yes, secure on-site parking is included."
+  - q: "Do you offer weekly or monthly rates?"
+    a: "Yes — contact us on WhatsApp for weekly and monthly rates."
+
+# Contact & enquiry
+phone: "+254 794 296 092"   # verify from the original ad before sending anything
+whatsapp: "254141722106"    # Nestly enquiry number while the sample is unannounced
+email: ""
+
+external_reservation_url: ""
+external_reservation_label: "Check availability"
+
+client_domain: ""
+branded_email: ""
+email_provider: ""
+email_setup_included: true
+
+canonical_url: ""
