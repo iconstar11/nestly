@@ -7,7 +7,8 @@
     "property": "Studio AirBnB Ngong road",
     "location": "Ngong Road, Nairobi",
     "phone": "0702597406",
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "properties": ["Studio/Airbnb Ngara (CBD)", "Cosy Studio Kilimani"],
     "locations": ["Ngara, Nairobi CBD", "Kilimani, Nairobi"],
     "phone": "0729289584",
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   },
   {
     "id": 3,
@@ -26,7 +28,8 @@
     "amenities": ["Gym", "Pool", "Secure parking", "Garden"],
     "locations": ["Kileleshwa", "Lavington"],
     "phone": "+254713324587",
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   },
   {
     "id": 4,
@@ -34,7 +37,8 @@
     "facebook": "BnB Gurus (149 Likes)",
     "services": ["Housing Assistance Service", "Interior Design Studio"],
     "phone": "+254791884720",
-    "source": "facebook_profile"
+    "source": "facebook_profile",
+    "status": "found"
   },
   {
     "id": 5,
@@ -44,7 +48,8 @@
     "priceNight": "Kes 5,000",
     "perks": "SGR and transfers available",
     "phone": ["+254726763061", "+254777763061"],
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   },
   {
     "id": 6,
@@ -54,7 +59,8 @@
     "tagline": "Home away from home, but better.",
     "useCases": ["Weekend Getaways", "Workcations", "Special Occasions", "Just Because"],
     "phone": "0722822381",
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   },
   {
     "id": 7,
@@ -64,14 +70,17 @@
     "location": "Thika Town",
     "tagline": "Your cozy comfort away from home",
     "phone": "0794296092",
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   },
   {
     "id": 8,
     "businessName": "Coastal Holidays",
+    "instagram": "kitanda_na_kadhalika",
     "phone": "0757813819",
     "region": "Coast",
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   },
   {
     "id": 9,
@@ -81,6 +90,7 @@
     "offer": "Mombasa Airbnb Offer - 2Bdr at Ksh 4,500",
     "phone": "+254748707258",
     "location": "Mombasa",
-    "source": "instagram_ad"
+    "source": "instagram_ad",
+    "status": "found"
   }
 ]

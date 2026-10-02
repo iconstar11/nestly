@@ -1,60 +1,79 @@
 # Nestly — Workflow
 
-## Cold call → Live page in under 30 minutes
+## Lead → Free sample → Paying customer
 
 ---
 
-### Step 1 — Find lead (2 min)
-- Browse short-stay listings on Instagram, Facebook, and listing sites; filter by Nairobi area
-- Note: owner name, property details, area, nightly price, phone (if visible)
-- Add to `leads.csv` with status = `found`
+### Phase 0 — Prep the free sample (first lead only)
+
+The first lead gets a **free pre-built website** — it's the proof every other pitch points to. It lives on the existing site (`nestlyafrica.cloud/stays/<slug>/`): **no own domain, no email, no extra cost**.
+
+1. Grab 3–8 photos of the lead's property from their Instagram/Facebook profile (booking platforms hide owner contact — always go to the social profile the lead was found on)
+2. Build the page: copy `stays/example`, fill in `config.yaml`, run `python generate.py stays/<client-slug>`
+3. Verify the phone number from the original ad before sending anything
+4. Update `leads.json` status → `page_live`
 
 ---
 
-### Step 2 — WhatsApp outreach (1 min)
-Send this message (with the free video attached):
+### Phase 1 — Free lead: WhatsApp first, call as the nudge
 
-> "Hi [Name], I saw your property online. I made you a short video for it — no charge. I also build mobile-friendly property websites for owners in Nairobi, with a .site domain, branded email, and direct WhatsApp enquiries. Would you be open to a quick call this week?"
+Send this message with the page link:
 
-Update CSV status → `contacted`
+> "Hi, I saw your property on Instagram. I build mobile-friendly websites for short-stay properties, and I made a free sample for yours so you can see exactly what it would look like: [link]. No charge, no obligation — if you'd rather not have it public, just tell me and I'll take it down today."
 
----
-
-### Step 3 — Quick call (10–15 min)
-Confirm:
-- Property name / branding they want
-- Area + key landmarks nearby
-- Amenities list
-- Photos (ask them to share 5–8 on WhatsApp)
-- Their price per night
-- WhatsApp number for enquiries
-- Any external availability link they use (optional)
-
-Update CSV status → `call_done`
+- No reply in 24–48 h → call: *"Hi, I sent you a WhatsApp message — did you get a chance to see the website I made for your property?"*
+- They like it → ask permission to keep it in the portfolio (and later, a testimonial)
+- They don't → take the page down
+- Update status → `contacted`; → `paying` if they ever upgrade to the paid package (own domain + email)
 
 ---
 
-### Step 4 — Build the page (5–10 min)
+### Phase 2 — Paid leads (everyone else)
+
+Send this message (points at the free sample as proof):
+
+> "Hi, I saw your property on Instagram. I build mobile-friendly websites for short-stay properties — photos, amenities, location, and direct WhatsApp enquiries, all on your own domain with a branded email. One-time payment of KES 11,000, no monthly fee. Here's one I made for a property in Thika: [free sample link]. Would you like one for yours?"
+
+- No reply in 24–48 h → same nudge call
+- Interested → 10–15 min call to collect:
+  - Property name / branding
+  - Area + nearby landmarks
+  - Amenities
+  - Photos (ask them to share 5–8 on WhatsApp)
+  - Price per night
+  - WhatsApp number for enquiries
+  - Optional external availability link
+- Build the page (`stays/<client-slug>`, same as Phase 0 step 2) and deploy
+- They pay (M-Pesa) → **then** register their `.site` domain, set up the branded email, and point the domain at the site. First year of domain + email included; renewal after that is at the provider's price — never quote a renewal figure
+- Shorten the page URL with Bitly and send it to the owner
+- Update status → `paying`
+
+---
+
+## Lead statuses (`leads.json`)
+
+| Status | Meaning |
+|---|---|
+| `found` | Lead identified, not yet contacted |
+| `contacted` | WhatsApp sent (+ nudge call if needed) |
+| `call_booked` | Info call scheduled |
+| `call_done` | Info collected |
+| `page_live` | Page built and link sent |
+| `paying` | One-time package paid |
+| `dead` | Not interested |
+
+---
+
+## Build commands
 
 ```bash
 # 1. Copy the example client folder
 cp -r stays/example stays/<client-slug>
-# e.g. stays/westlands-jane
 
-# 2. Fill in config.yaml with call notes
-# Use AI to help draft meta_description and location_description
-
-# 3. Generate the page
+# 2. Fill in config.yaml, then generate
 python generate.py stays/<client-slug>
 
-# 4. Open and review
-open stays/<client-slug>/index.html
-```
-
----
-
-### Step 5 — Deploy (2 min)
-```bash
+# 3. Deploy
 git add stays/<client-slug>/
 git commit -m "Add page: <client-slug>"
 git push
@@ -62,28 +81,6 @@ git push
 
 Page is live at:
 `https://nestlyafrica.cloud/stays/<client-slug>/`
-
----
-
-### Step 6 — Bitly + deliver (1 min)
-- Go to bitly.com → shorten the page URL
-- Add Bitly URL to `leads.csv`
-- Send the link to the owner on WhatsApp
-
-Update CSV status → `page_live`
-
----
-
-## CSV Status Values
-| Status | Meaning |
-|---|---|
-| `found` | Lead identified, not yet contacted |
-| `contacted` | WhatsApp sent + video delivered |
-| `call_booked` | Call scheduled |
-| `call_done` | Call completed, info collected |
-| `page_live` | Page built and link sent |
-| `paying` | One-time package paid |
-| `dead` | Not interested |
 
 ---
 
