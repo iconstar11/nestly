@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <link rel="icon" type="image/svg+xml" href="https://nestlyafrica.cloud/logo.svg" />
   <title>{{ property_name }} — {{ area }}, {{ city }} | Nestly Africa</title>
   <meta name="description" content="{{ meta_description }}" />
   <meta name="keywords" content="short stay {{ area }} {{ city }}, furnished apartment {{ area }}, serviced apartment {{ city }}, guest accommodation {{ area }}, {{ extra_keywords }}" />
@@ -115,13 +116,18 @@
       box-shadow: 0 1px 4px rgba(0,0,0,.06);
       border-bottom-color: var(--sand);
     }
+    .nav-bar .nav-brand {
+      display: flex; align-items: center; gap: 8px;
+      min-width: 0; max-width: 65%;
+    }
+    .nav-bar .nav-brand img { width: 28px; height: 28px; flex-shrink: 0; }
     .nav-bar .nav-name {
       font-family: var(--font-display);
       font-size: .95rem;
       font-weight: 700;
       color: var(--forest);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      max-width: 60%;
+      min-width: 0;
     }
     .nav-bar .nav-cta {
       background: var(--forest);
@@ -255,6 +261,26 @@
       width: 100%; height: 280px;
       border: none; display: block;
     }
+
+    /* ── LOCATION BUTTONS ── */
+    .loc-actions {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 16px;
+    }
+    .loc-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--sand);
+      background: var(--white);
+      color: var(--earth);
+      font: 600 .9rem var(--font-body);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .loc-btn:hover { border-color: var(--forest); color: var(--forest); }
+    .loc-btn.primary { background: var(--forest); border-color: var(--forest); color: #fff; }
+    .loc-btn.primary:hover { color: #fff; opacity: .9; }
 
     /* ── PHOTO GRID ── */
     .photo-grid {
@@ -583,7 +609,10 @@
 
 <!-- STICKY NAV -->
 <nav class="nav-bar" id="navBar">
-  <span class="nav-name">{{ property_name }}</span>
+  <span class="nav-brand">
+    <img src="https://nestlyafrica.cloud/logo.svg" alt="" width="28" height="28" />
+    <span class="nav-name">{{ property_name }}</span>
+  </span>
   <a href="#booking" class="nav-cta">Check Availability</a>
 </nav>
 
@@ -613,6 +642,16 @@
       {% endfor %}
     </div>
     {% endif %}
+    {% if coordinates %}{% set dest = coordinates.lat ~ ',' ~ coordinates.lng %}{% else %}{% set dest = [street_address, area, city] | select | join(', ') %}{% endif %}
+    <div class="loc-actions">
+      <a class="loc-btn primary" href="https://www.google.com/maps/search/?api=1&query={{ dest | urlencode }}" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      <a class="loc-btn" href="https://www.google.com/maps/dir/?api=1&destination={{ dest | urlencode }}" target="_blank" rel="noopener">🧭 Get directions</a>
+      {% if coordinates %}
+      <a class="loc-btn" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Blatitude%5D={{ coordinates.lat }}&dropoff%5Blongitude%5D={{ coordinates.lng }}&dropoff%5Bnickname%5D={{ property_name | urlencode }}" target="_blank" rel="noopener">🚗 Ride with Uber</a>
+      <a class="loc-btn" href="https://waze.com/ul?ll={{ coordinates.lat }}%2C{{ coordinates.lng }}&navigate=yes" target="_blank" rel="noopener">🚙 Open in Waze</a>
+      {% endif %}
+      <button type="button" class="loc-btn" data-copy="{{ (property_name ~ ', ' ~ ([street_address, area, city] | select | join(', '))) | e }}" onclick="navigator.clipboard.writeText(this.dataset.copy).then(() => { this.textContent = '✅ Address copied'; })">📋 Copy address for Bolt or Little</button>
+    </div>
     {% if map_embed_url %}
     <div class="map-wrap">
       <iframe src="{{ map_embed_url }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -723,7 +762,7 @@
 <!-- FOOTER -->
 <footer class="page-footer">
   {{ property_name }} &middot; {{ area }}, {{ city }}, Kenya<br />
-  <a href="https://nestlyafrica.cloud/">Powered by Nestly Africa</a> &mdash; property websites for short-stay accommodation
+  <a href="https://nestlyafrica.cloud/"><img src="https://nestlyafrica.cloud/logo.svg" alt="" width="16" height="16" style="vertical-align:-3px;margin-right:4px" />Powered by Nestly Africa</a> &mdash; property websites for short-stay accommodation
 </footer>
 
 <!-- MOBILE STICKY FOOTER -->

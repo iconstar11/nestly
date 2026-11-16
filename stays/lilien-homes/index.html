@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <link rel="icon" type="image/svg+xml" href="https://nestlyafrica.cloud/logo.svg" />
   <title>Lilien Homes — Thika Town, Kiambu | Nestly Africa</title>
   <meta name="description" content="Cozy 1-bedroom home stay in Thika Town. Superhost-quality comfort, fast WiFi, secure compound. Enquire directly on WhatsApp." />
   <meta name="keywords" content="short stay Thika Town Kiambu, furnished apartment Thika Town, serviced apartment Kiambu, guest accommodation Thika Town, short stay thika, home stay thika, furnished apartment kiambu, guest accommodation thika" />
@@ -97,13 +98,18 @@
       box-shadow: 0 1px 4px rgba(0,0,0,.06);
       border-bottom-color: var(--sand);
     }
+    .nav-bar .nav-brand {
+      display: flex; align-items: center; gap: 8px;
+      min-width: 0; max-width: 65%;
+    }
+    .nav-bar .nav-brand img { width: 28px; height: 28px; flex-shrink: 0; }
     .nav-bar .nav-name {
       font-family: var(--font-display);
       font-size: .95rem;
       font-weight: 700;
       color: var(--forest);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      max-width: 60%;
+      min-width: 0;
     }
     .nav-bar .nav-cta {
       background: var(--forest);
@@ -225,6 +231,26 @@
       width: 100%; height: 280px;
       border: none; display: block;
     }
+
+    /* ── LOCATION BUTTONS ── */
+    .loc-actions {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 16px;
+    }
+    .loc-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--sand);
+      background: var(--white);
+      color: var(--earth);
+      font: 600 .9rem var(--font-body);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .loc-btn:hover { border-color: var(--forest); color: var(--forest); }
+    .loc-btn.primary { background: var(--forest); border-color: var(--forest); color: #fff; }
+    .loc-btn.primary:hover { color: #fff; opacity: .9; }
 
     /* ── PHOTO GRID ── */
     .photo-grid {
@@ -553,7 +579,10 @@
 
 <!-- STICKY NAV -->
 <nav class="nav-bar" id="navBar">
-  <span class="nav-name">Lilien Homes</span>
+  <span class="nav-brand">
+    <img src="https://nestlyafrica.cloud/logo.svg" alt="" width="28" height="28" />
+    <span class="nav-name">Lilien Homes</span>
+  </span>
   <a href="#booking" class="nav-cta">Check Availability</a>
 </nav>
 
@@ -590,6 +619,13 @@
       
     </div>
     
+    
+    <div class="loc-actions">
+      <a class="loc-btn primary" href="https://www.google.com/maps/search/?api=1&query=Thika%20Town%2C%20Kiambu" target="_blank" rel="noopener">📍 View on Google Maps</a>
+      <a class="loc-btn" href="https://www.google.com/maps/dir/?api=1&destination=Thika%20Town%2C%20Kiambu" target="_blank" rel="noopener">🧭 Get directions</a>
+      
+      <button type="button" class="loc-btn" data-copy="Lilien Homes, Thika Town, Kiambu" onclick="navigator.clipboard.writeText(this.dataset.copy).then(() => { this.textContent = '✅ Address copied'; })">📋 Copy address for Bolt or Little</button>
+    </div>
     
   </section>
 
@@ -732,7 +768,7 @@
 <!-- FOOTER -->
 <footer class="page-footer">
   Lilien Homes &middot; Thika Town, Kiambu, Kenya<br />
-  <a href="https://nestlyafrica.cloud/">Powered by Nestly Africa</a> &mdash; property websites for short-stay accommodation
+  <a href="https://nestlyafrica.cloud/"><img src="https://nestlyafrica.cloud/logo.svg" alt="" width="16" height="16" style="vertical-align:-3px;margin-right:4px" />Powered by Nestly Africa</a> &mdash; property websites for short-stay accommodation
 </footer>
 
 <!-- MOBILE STICKY FOOTER -->

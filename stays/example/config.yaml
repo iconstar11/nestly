@@ -11,6 +11,11 @@ property_type: "Furnished studio"
 area: "Westlands"
 city: "Nairobi"
 street_address: "Waiyaki Way"   # general area is fine, no need for exact address
+# Map pin (optional, but needed for the Uber and Waze buttons).
+# In Google Maps, right-click the property's pin and click the numbers at the top to copy them.
+# coordinates:
+#   lat: -1.2635
+#   lng: 36.8030
 
 # Landmarks — these are what people type into Google
 landmarks:

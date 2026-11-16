@@ -26,7 +26,7 @@ Neutral, independent wording only. Approved vocabulary:
 - Property owner, accommodation provider
 - Direct enquiry, property website, check availability, enquire on WhatsApp
 
-Never mention in public pages, templates, README, sample content, config labels, or visible UI: booking platform names, platform commissions, property-management software, or any company/platform name. The only external brand mentions allowed are Nestly itself, WhatsApp (the enquiry channel), Google (search setup), .site (the domain TLD included in packages), and M-Pesa (Premium deposit method).
+Never mention in public pages, templates, README, sample content, config labels, or visible UI: booking platform names, platform commissions, property-management software, or any company/platform name. The only external brand mentions allowed are Nestly itself, WhatsApp (the enquiry channel), Google (search setup), .site (the domain TLD included in packages), M-Pesa (Premium deposit method), and Google Maps, Uber, Waze, Bolt and Little (location buttons on property pages).
 
 ## Pricing (as of Nov 2026)
 - **Starter:** KES 18,000 one-time — property website, gallery, amenities, location, pricing, WhatsApp enquiry button, basic Google search setup, .site domain for the first three years (no branded email), one revision round
