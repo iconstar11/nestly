@@ -32,7 +32,7 @@ Send this message with the page link:
 
 Send this message (points at the free sample as proof):
 
-> "Hi, I saw your property on Instagram. I build mobile-friendly websites for short-stay properties — photos, amenities, location, and direct WhatsApp enquiries, all on your own domain with a branded email. One-time payment of KES 18,000, no monthly fee. Here's one I made for a property in Thika: [free sample link]. Would you like one for yours?"
+> "Hi, I saw your property on Instagram. I build mobile-friendly websites for short-stay properties — photos, amenities, location, and direct WhatsApp enquiries, all on your own domain. One-time payment from KES 18,000, no monthly fee. Here's one I made for a property in Thika: [free sample link]. Would you like one for yours?"
 
 - No reply in 24–48 h → same nudge call
 - Interested → 10–15 min call to collect:
@@ -43,8 +43,9 @@ Send this message (points at the free sample as proof):
   - Price per night
   - WhatsApp number for enquiries
   - Optional external availability link
+  - Premium only: M-Pesa Till or Paybill number for deposits
 - Build the page (`stays/<client-slug>`, same as Phase 0 step 2) and deploy
-- They pay (M-Pesa) → **then** register their `.site` domain, set up the branded email, and point the domain at the site. First year of domain + email included; renewal after that is at the provider's price — never quote a renewal figure
+- They pay (M-Pesa) → **then** register their `.site` domain (and, on Premium, set up the branded email) and point the domain at the site. First three years of domain included; renewal after that is at the provider's price — never quote a renewal figure
 - Shorten the page URL with Bitly and send it to the owner
 - Update status → `paying`
 
@@ -88,3 +89,108 @@ Page is live at:
 - Starter — KES 18,000 one-time (one revision round)
 - Premium — KES 35,000 one-time (online booking + M-Pesa deposit, two revision rounds + 30 days minor updates)
 - No monthly fee. Domain and email renewal after year three is billed separately at the provider's price.
+
+---
+
+## WhatsApp quick replies
+
+Set these in WhatsApp Business → Settings → Business tools → Quick replies. Type `/` in a chat to use one.
+Rules: shortcut is one short lowercase word; messages you send first (cold outreach, `/followup`) stay under ~160 characters; replies end with one clear question or next step; every reply stays under ~500 characters (fits the app limit and shows without much scrolling). Delete the old `/professional` reply.
+
+**/welcome**
+```
+Hi, welcome to Nestly Africa 👋 We build professional websites for short-stay properties, with direct WhatsApp enquiries and a one-time payment.
+
+What's your property called, and which area is it in?
+```
+
+**/price**
+```
+We have two one-time packages, no monthly fee:
+
+*Starter: KES 18,000*
+Your property website + free .site domain for 3 years
+
+*Premium: KES 35,000*
+Everything in Starter, plus online booking with M-Pesa deposits paid straight to you
+
+Which one suits your property?
+```
+
+**/starter**
+```
+*Starter: KES 18,000 one-time*
+✅ Mobile-friendly property website
+✅ Photo gallery, amenities and location
+✅ Prices and a WhatsApp enquiry button
+✅ Basic Google search setup
+✅ Free .site domain for 3 years
+✅ One round of changes
+
+No monthly fee. Shall I send what I need from you to start?
+```
+
+**/premium**
+```
+*Premium: KES 35,000 one-time*
+Everything in Starter, plus:
+✅ Availability calendar on your website
+✅ Guests book and pay a deposit by M-Pesa, straight to your own Till or Paybill
+✅ Dashboard to block dates and see bookings
+✅ Branded email, e.g. hello@yourproperty.site
+✅ House rules, FAQs and fuller descriptions
+✅ Two rounds of changes + 30 days of small updates
+
+Would you like to go with Premium?
+```
+
+**/start**
+```
+Great! Please send these here on WhatsApp:
+1. Property name
+2. Area and nearby landmarks
+3. 5–8 clear photos
+4. Amenities (Wi-Fi, parking, etc.)
+5. Price per night
+6. Check-in and check-out times
+7. House rules
+8. A short description in your own words
+9. The WhatsApp number guests should contact
+
+For Premium, also send your M-Pesa Till or Paybill number.
+```
+
+**/domain**
+```
+Your website gets its own address, like *yourproperty.site*, free for the first 3 years. After that, the domain renews at the provider's yearly price. There is no monthly website fee.
+```
+
+**/timeline**
+```
+How it works:
+1. You send your photos and details
+2. We send you a preview link within a few days
+3. You tell us what to change
+4. You pay, and your site goes live on your own domain
+
+Premium takes a little longer because of the booking setup.
+```
+
+**/followup**
+```
+Hi, just checking in. Did you get a chance to look at the website link I sent? Happy to answer any questions.
+```
+
+**/thanks**
+```
+Asante sana for choosing Nestly Africa 🙏 It's a pleasure working with you. If you know another property owner who needs a website, feel free to send them our way!
+```
+
+**/affiliate**
+```
+Know other property owners? Join the Nestly Africa affiliate program 🤝
+
+They get 10% off, and you earn 20% of what they pay: KES 3,240 per Starter or KES 6,300 per Premium, sent to your M-Pesa once they pay in full.
+
+Sign up: https://nestlyafrica.cloud/partner.html
+```
