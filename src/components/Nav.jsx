@@ -22,7 +22,8 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="#" className="font-display text-xl font-bold text-forest tracking-wide">
+        <a href="#" className="flex items-center gap-2 font-display text-xl font-bold text-forest tracking-wide">
+          <img src="/logo.svg" alt="" width="32" height="32" className="w-8 h-8" />
           Nestly Africa
         </a>
         <div className="hidden sm:flex items-center gap-6 text-sm font-medium">

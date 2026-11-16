@@ -231,7 +231,8 @@ export default function PartnerDashboard() {
     <div className="min-h-screen px-4 py-10">
       <div className="max-w-lg mx-auto">
         <div className="flex items-center justify-between mb-10">
-          <a href="/" className="font-display text-xl font-bold text-forest tracking-wide">
+          <a href="/" className="flex items-center gap-2 font-display text-xl font-bold text-forest tracking-wide">
+            <img src="/logo.svg" alt="" width="32" height="32" className="w-8 h-8" />
             Nestly Africa
           </a>
           {session && (
