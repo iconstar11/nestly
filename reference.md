@@ -26,14 +26,14 @@ Neutral, independent wording only. Approved vocabulary:
 - Property owner, accommodation provider
 - Direct enquiry, property website, check availability, enquire on WhatsApp
 
-Never mention in public pages, templates, README, sample content, config labels, or visible UI: booking platform names, platform commissions, property-management software, or any company/platform name. The only external brand mentions allowed are Nestly itself, WhatsApp (the enquiry channel), Google (search setup), and .site (the domain TLD included in packages).
+Never mention in public pages, templates, README, sample content, config labels, or visible UI: booking platform names, platform commissions, property-management software, or any company/platform name. The only external brand mentions allowed are Nestly itself, WhatsApp (the enquiry channel), Google (search setup), .site (the domain TLD included in packages), and M-Pesa (Premium deposit method).
 
-## Pricing (as of Aug 2026)
-- **Starter:** KES 11,000 one-time — property website, gallery, amenities, location, pricing, WhatsApp enquiry button, basic Google search setup, .site domain + branded email for year one, one revision round
-- **Professional:** KES 15,000 one-time — everything in Starter, plus detailed copy, house rules & FAQs, enhanced local search setup, social-media sharing preview, visitor & enquiry tracking, two revision rounds, 30 days of minor post-launch updates
+## Pricing (as of Nov 2026)
+- **Starter:** KES 18,000 one-time — property website, gallery, amenities, location, pricing, WhatsApp enquiry button, basic Google search setup, .site domain for the first three years (no branded email), one revision round
+- **Premium:** KES 35,000 one-time — everything in Starter, plus availability calendar, online booking with M-Pesa deposit straight to the owner's Till/Paybill, owner dashboard, detailed copy, house rules & FAQs, enhanced local search setup, social-media sharing preview, visitor & enquiry tracking, two revision rounds, 30 days of minor post-launch updates
 - Label: "One-time payment. No monthly website fee."
-- The .site domain and branded email are included for the first year. Renewal after the first year is charged separately at the provider's current renewal price.
-- Email wording: "One branded email address, such as hello@yourproperty.site" — includes basic forwarding or mailbox setup, depending on the selected domain and email provider.
+- The .site domain and branded email are included for the first three years. Renewal after that is charged separately at the provider's current renewal price.
+- Email is Premium only. Wording: "One branded email address, such as hello@yourproperty.site" — includes basic forwarding or mailbox setup, depending on the selected domain and email provider.
 
 ## Lead pipeline statuses
 | Status | Meaning |

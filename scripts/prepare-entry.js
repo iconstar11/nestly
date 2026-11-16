@@ -8,4 +8,5 @@ import { join } from 'node:path';
 
 const ROOT = join(import.meta.dirname, '..');
 await copyFile(join(ROOT, 'src', 'index.html'), join(ROOT, 'index.html'));
-process.stdout.write('Synced src/index.html to root for build entry.\n');
+await copyFile(join(ROOT, 'src', 'partner.html'), join(ROOT, 'partner.html'));
+process.stdout.write('Synced src/index.html and src/partner.html to root for build entry.\n');

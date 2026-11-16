@@ -6,14 +6,11 @@ export default function Hero() {
       <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-12 [@media(max-height:500px)]:py-6 text-center">
-        <p className="text-sm font-semibold tracking-widest text-terracotta uppercase mb-4 [@media(max-height:500px)]:mb-2">
-          Short-stay accommodation in Nairobi
-        </p>
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-earth leading-tight mb-4 [@media(max-height:500px)]:text-3xl">
           Give your accommodation a professional online presence.
         </h1>
         <p className="text-lg sm:text-xl text-earth/60 max-w-xl mx-auto mb-6 leading-relaxed [@media(max-height:500px)]:text-base">
-          Get a mobile-friendly property website with your own .site domain, branded email,
+          Get a mobile-friendly property website with your own .site domain
           and direct WhatsApp enquiries.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -31,7 +28,7 @@ export default function Hero() {
           </a>
         </div>
         <p className="mt-6 text-sm text-earth/40 [@media(max-height:500px)]:hidden">
-          Built for furnished apartments, serviced apartments, and holiday stays in Nairobi
+          Built for furnished apartments, serviced apartments, and holiday stays across Africa
         </p>
       </div>
     </section>

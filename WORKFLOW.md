@@ -32,7 +32,7 @@ Send this message with the page link:
 
 Send this message (points at the free sample as proof):
 
-> "Hi, I saw your property on Instagram. I build mobile-friendly websites for short-stay properties — photos, amenities, location, and direct WhatsApp enquiries, all on your own domain with a branded email. One-time payment of KES 11,000, no monthly fee. Here's one I made for a property in Thika: [free sample link]. Would you like one for yours?"
+> "Hi, I saw your property on Instagram. I build mobile-friendly websites for short-stay properties — photos, amenities, location, and direct WhatsApp enquiries, all on your own domain with a branded email. One-time payment of KES 18,000, no monthly fee. Here's one I made for a property in Thika: [free sample link]. Would you like one for yours?"
 
 - No reply in 24–48 h → same nudge call
 - Interested → 10–15 min call to collect:
@@ -85,6 +85,6 @@ Page is live at:
 ---
 
 ## Pricing Reminder
-- Starter — KES 11,000 one-time (one revision round)
-- Professional — KES 15,000 one-time (two revision rounds + 30 days minor updates)
-- No monthly fee. Domain and email renewal after year one is billed separately at the provider's price.
+- Starter — KES 18,000 one-time (one revision round)
+- Premium — KES 35,000 one-time (online booking + M-Pesa deposit, two revision rounds + 30 days minor updates)
+- No monthly fee. Domain and email renewal after year three is billed separately at the provider's price.

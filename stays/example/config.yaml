@@ -61,14 +61,14 @@ amenities:
   - "Washing machine"
   - "24/7 security"
 
-# House rules (optional — included in the Professional package)
+# House rules (optional — included in the Premium package)
 house_rules:
   - "Check-in from 2 PM, check-out by 10 AM"
   - "No smoking inside"
   - "Quiet hours 10 PM – 7 AM"
   - "No parties or events"
 
-# FAQs (optional — included in the Professional package)
+# FAQs (optional — included in the Premium package)
 faqs:
   - q: "How far is the nearest mall?"
     a: "2 Rivers Mall is a 5-minute drive away."

@@ -1,7 +1,6 @@
 const items = [
   { title: 'Live property website', icon: '\u{1F310}' },
-  { title: 'Free .site domain for the first year', icon: '\u{1F517}' },
-  { title: 'One branded email address', icon: '\u{2709}' },
+  { title: 'Free .site domain for the first three years', icon: '\u{1F517}' },
   { title: 'Mobile-friendly design', icon: '\u{1F4F1}' },
   { title: 'WhatsApp enquiry button', icon: '\u{1F4AC}' },
   { title: 'Google-ready page setup', icon: '\u{1F50D}' },

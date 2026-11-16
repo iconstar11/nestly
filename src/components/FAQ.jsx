@@ -3,7 +3,7 @@ import { useState } from 'react';
 const faqs = [
   {
     q: 'Who is this for?',
-    a: 'Owners of short-stay accommodation in Nairobi — furnished apartments, serviced apartments, and holiday stays. If guests stay overnight at your property and you want them to find and contact you directly, this is for you.',
+    a: 'Owners of short-stay accommodation across Africa — furnished apartments, serviced apartments, and holiday stays. If guests stay overnight at your property and you want them to find and contact you directly, this is for you.',
   },
   {
     q: 'Do I need to be technical?',
@@ -19,15 +19,15 @@ const faqs = [
   },
   {
     q: 'Do you handle bookings or take payments?',
-    a: 'No. Your website sends enquiries straight to you on WhatsApp. You confirm availability, agree terms, and take payment directly with your guest — the way you already do.',
+    a: 'With Starter, your website sends enquiries straight to you on WhatsApp and you take payment directly with your guest. With Premium, guests can pick dates on your website and pay a deposit by M-Pesa straight to your own Till or Paybill. Nestly never holds your money.',
   },
   {
     q: 'Can I request changes after my website goes live?',
-    a: 'Yes. Starter includes one revision round. Professional includes two revision rounds and thirty days of minor post-launch updates. After that, additional changes can be arranged as needed.',
+    a: 'Yes. Starter includes one revision round. Premium includes two revision rounds and thirty days of minor post-launch updates. After that, additional changes can be arranged as needed.',
   },
   {
-    q: 'What happens after the first year?',
-    a: 'The .site domain and branded email are included for the first year. Renewal after the first year is charged separately at the provider\'s current renewal price. Your website itself keeps working — there is no monthly website fee.',
+    q: 'What happens after the first three years?',
+    a: 'The .site domain is included for the first three years (Premium also includes a branded email for the same period). Renewal after that is charged separately at the provider\'s current renewal price. Your website itself keeps working — there is no monthly website fee.',
   },
 ];
 

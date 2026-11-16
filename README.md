@@ -130,7 +130,23 @@ git push
 
 | Package | Price |
 |---|---|
-| Starter | KES 11,000 one-time |
-| Professional | KES 15,000 one-time |
+| Starter | KES 18,000 one-time |
+| Premium | KES 35,000 one-time |
 
-One-time payment. No monthly website fee. The .site domain and branded email are included for the first year; renewal after the first year is charged separately at the provider's current renewal price. See the business site for the full package contents.
+One-time payment. No monthly website fee. The .site domain and branded email are included for the first three years; renewal after that is charged separately at the provider's current renewal price. See the business site for the full package contents.
+
+## Affiliate program (Supabase)
+
+Affiliates sign in at `/partner.html` with an email link, get a referral code, and share `https://nestlyafrica.cloud/?ref=CODE`. Owners who use the code get 10% off, and the code is added to their WhatsApp enquiry. Affiliates earn 20% of what the owner pays.
+
+**One-time setup**
+1. Create a free project at supabase.com.
+2. SQL Editor → paste `supabase/schema.sql` → Run.
+3. Authentication → URL Configuration: Site URL `https://nestlyafrica.cloud`; Redirect URLs `https://nestlyafrica.cloud/partner.html` and `http://localhost:5173/partner.html`.
+4. Project Settings → API: copy the URL and anon key into `.env` (see `.env.example`) for local dev, and into GitHub → Settings → Secrets and variables → Actions → **Variables** as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` for deploys.
+
+**Running it (Table Editor → `referrals`)**
+- A row appears with status `enquired` when an owner with a code taps Enquire on WhatsApp.
+- When the owner pays: set `status` = `client_paid`, `amount_paid_kes` = amount, `owner_name`. The reward (20%) is calculated automatically.
+- After you send the M-Pesa reward: set `status` = `reward_paid`.
+- To disable a code: `affiliates` → set `active` = false.

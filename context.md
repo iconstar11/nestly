@@ -20,11 +20,11 @@ Owners of short-stay accommodation in Nairobi — furnished apartments, serviced
 - Outreach workflow is WhatsApp-first: find owner → send free preview video → book call → build page → deliver
 
 ## Revenue model
-Two one-time packages, no monthly fee:
-- **Starter — KES 11,000**: property website, gallery, amenities, location, pricing, WhatsApp button, basic Google setup, .site domain + branded email for year one, one revision round
-- **Professional — KES 15,000**: everything in Starter plus detailed copy, house rules & FAQs, enhanced local search setup, social preview, visitor & enquiry tracking, two revision rounds, 30 days of minor updates
+Two one-time packages, no monthly fee (Professional removed Nov 2026):
+- **Starter — KES 18,000**: property website, gallery, amenities, location, pricing, WhatsApp button, basic Google setup, .site domain for three years (no email), one revision round
+- **Premium — KES 35,000**: everything in Starter plus availability calendar, online booking with M-Pesa deposit to the owner's own Till/Paybill, owner dashboard, detailed copy, house rules & FAQs, enhanced local search setup, social preview, visitor & enquiry tracking, two revision rounds, 30 days of minor updates
 
-The .site domain and branded email are included for the first year; renewal is billed separately at the provider's price.
+The .site domain and branded email are included for the first three years; renewal is billed separately at the provider's price.
 
 ## Key decisions made
 - **One-time pricing, no monthly fees** (Aug 2026) — simpler to sell, no collection overhead

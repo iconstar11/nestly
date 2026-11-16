@@ -1,3 +1,5 @@
+import { useReferralCode, waLink, logEnquiry } from '../lib/referral';
+
 import { useState, useEffect } from 'react';
 
 const WA_MESSAGE =
@@ -5,6 +7,7 @@ const WA_MESSAGE =
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const code = useReferralCode();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -29,7 +32,8 @@ export default function Nav() {
           <a href="#pricing" className="text-earth/70 hover:text-forest transition-colors">Pricing</a>
         </div>
         <a
-          href={`https://wa.me/254141722106?text=${encodeURIComponent(WA_MESSAGE)}`}
+          href={waLink(WA_MESSAGE, code)}
+          onClick={() => logEnquiry(code)}
           target="_blank"
           rel="noopener noreferrer"
           className="bg-gold text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-gold/90 transition-colors shadow-sm"

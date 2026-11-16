@@ -104,8 +104,8 @@ export default function Calculator() {
             </p>
             <p className="text-earth/70 text-sm mb-1">
               A Nestly website costs{' '}
-              <strong className="text-forest">KES 11,000 (Starter)</strong> or{' '}
-              <strong className="text-forest">KES 15,000 (Professional)</strong> once — no monthly
+              <strong className="text-forest">KES 18,000 (Starter)</strong> or{' '}
+              <strong className="text-forest">KES 35,000 (Premium)</strong> once — no monthly
               fee, no percentage.
             </p>
             <p className="text-forest font-bold">
